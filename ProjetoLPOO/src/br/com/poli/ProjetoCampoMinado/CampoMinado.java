@@ -30,6 +30,6 @@ public Dificuldade getDificuldade() {
 public void setDificuldade(Dificuldade dificuldade) {
 	this.dificuldade = dificuldade;
 }
-  
+  //.
 
 }
