@@ -1,10 +1,9 @@
 package br.com.poli.ProjetoCampoMinado;
-
+// Arthur Falcão - Rafael Marinho
 public class Main {
 	public static void main(String[] args) {
-		 Mapa mapa = new Mapa(Dificuldade.DIFICIL);
-		 mapa.inicializaCampo();
-		 mapa.imprimeTela();
+	 
+		CampoMinado campominado = new CampoMinado("mano jj",Dificuldade.FACIL);
 
 
 

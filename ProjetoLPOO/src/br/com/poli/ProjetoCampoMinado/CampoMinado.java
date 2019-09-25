@@ -2,34 +2,19 @@ package br.com.poli.ProjetoCampoMinado;
 
 public class CampoMinado {
  private Jogador jogador;
- public CampoMinado(Jogador jogador, Mapa mapa, Dificuldade dificuldade) {
-	
-	this.jogador = jogador;
-	this.mapa = mapa;
-	this.dificuldade = dificuldade;
-}
+private Dificuldade dificuldade;
 private Mapa mapa;
- private Dificuldade dificuldade;
- 
- 
-public Jogador getJogador() {
-	return jogador;
+
+public CampoMinado(String nome, Dificuldade dificuldade) {
+	this.jogador = new Jogador(nome);
+	this.dificuldade = dificuldade;
+	this.mapa = new Mapa(dificuldade);
 }
-public void setJogador(Jogador jogador) {
-	this.jogador = jogador;
+
+public Jogador getJogador() {
+	return this.jogador;
 }
 public Mapa getMapa() {
-	return mapa;
+	return this.mapa;
 }
-public void setMapa(Mapa mapa) {
-	this.mapa = mapa;
-}
-public Dificuldade getDificuldade() {
-	return dificuldade;
-}
-public void setDificuldade(Dificuldade dificuldade) {
-	this.dificuldade = dificuldade;
-}
-  //.
-
 }

@@ -7,13 +7,19 @@ public class Mapa {
    public Mapa(Dificuldade dificuldade) {
 	   this.dificuldade = dificuldade;
 	   this.campo = new int [dificuldade.getValor()][dificuldade.getValor()];
+	   this.inicializaCampo();
+	   this.imprimeTela();
    }
    
    
    public void inicializaCampo() {
 	   Random random = new Random();
 	   for(int i=1;i<=10;i++) {
-		   campo[random.nextInt(dificuldade.getValor())][random.nextInt(dificuldade.getValor())]=-1;
+		   int x = random.nextInt(dificuldade.getValor());
+		   int y = random.nextInt(dificuldade.getValor());
+		   if (campo[x][y] == 0) 
+			   campo [x][y] = -1;
+		   else i--;
 	   }
    }
    
