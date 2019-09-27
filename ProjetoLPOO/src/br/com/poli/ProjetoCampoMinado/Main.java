@@ -3,8 +3,10 @@ package br.com.poli.ProjetoCampoMinado;
 public class Main {
 	public static void main(String[] args) {
 	 
-		CampoMinado campominado = new CampoMinado("mano jj",Dificuldade.FACIL);
-
+		CampoMinado teste = new CampoMinado("Fulano", Dificuldade.FACIL);
+		System.out.println();
+		CampoMinado teste2 = new CampoMinado("Beltrano", Dificuldade.DIFICIL);
+        
 
 
 	}
