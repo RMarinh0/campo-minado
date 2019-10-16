@@ -10,7 +10,18 @@ public class CampoMinado {
 		this.jogador = new Jogador(nome);
 		this.dificuldade = dificuldade;
 		// o paramêtro dificuldade será aproveitado para a formação do mapa
-		this.mapa = new Mapa(dificuldade);
+		switch(dificuldade) {
+		case FACIL:
+			this.mapa = new MapaFacil();
+			break;
+		case MEDIO:
+			this.mapa = new MapaMedio();
+			break;
+		case DIFICIL:
+			this.mapa = new MapaDificil();
+			break;
+		}
+		
 	}
 
 	public Jogador getJogador() {

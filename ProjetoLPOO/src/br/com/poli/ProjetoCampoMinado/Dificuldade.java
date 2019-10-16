@@ -2,8 +2,8 @@ package br.com.poli.ProjetoCampoMinado;
 
 public enum Dificuldade {
 
-	FACIL(9), DIFICIL(16);
-	// pré-definindo as duas dificuldades e seus valores por meio de um enum
+	FACIL(9), MEDIO(16), DIFICIL(32);
+	// pré-definindo as três dificuldades e seus valores por meio de um enum
 	private int valor;
 
 	// construtor
