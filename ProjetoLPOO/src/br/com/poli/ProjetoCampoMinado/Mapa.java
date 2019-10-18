@@ -15,24 +15,33 @@ public abstract class Mapa {
 		// agilização
 		inicializarCelulas();
 		distribuirBombas(bombas);
-		this.contarBombas();
+		contarBombas();
+		
 	}
 
 	public void imprimeTela(boolean teste) {
 		// impressão da matrin nxn, com n sendo o valor da dificuldade escolhida
-		if (teste == false) {
+		if (teste == true) {
 			for (int i = 0; i < campo.length; i++) {
 				for (int j = 0; j < campo.length; j++) {
-					if (campo[i][j].isVisivel() == true) {
-						System.out.print(campo[i][j].getQtdBombasVizinhas());
+					if (campo[i][j].isBomba() == false) {
+						System.out.print(" " + campo[i][j].getQtdBombasVizinhas());
+					} else {
+						System.out.print(" B");
 					}
-					System.out.println();
+
 				}
+				System.out.println();
 			}
 		} else {
 			for (int i = 0; i < campo.length; i++) {
 				for (int j = 0; j < campo.length; j++) {
-					System.out.print(campo[i][j].getQtdBombasVizinhas());
+					if(campo[i][j].isVisivel()==false)
+					System.out.print(" -");
+					else if(campo[i][j].isBomba()==true) 
+						System.out.print(" B");
+					else
+						System.out.print(" " + campo[i][j].getQtdBombasVizinhas());
 				}
 				System.out.println();
 			}
@@ -64,6 +73,34 @@ public abstract class Mapa {
 
 	public void escolherPosicao(int linha, int coluna) {
 
+		if (campo[linha][coluna].isBomba() == true) {
+			campo[linha][coluna].setVisivel(true);
+			System.out.println("FIM DE JOGO! VOCÊ PERDEU");
+		} else if (campo[linha][coluna].getQtdBombasVizinhas() > 0) {
+			campo[linha][coluna].setVisivel(true);
+		} else if (campo[linha][coluna].getQtdBombasVizinhas() == 0) {
+			checarVazios(linha, coluna);
+		}
+
+		imprimeTela(false);
+	}
+
+	public void checarVazios(int i, int j) {
+		for (int k = i - 1; k <= i + 1; k++) {
+			if (k >= 0 && k < campo.length) {
+				for (int l = j - 1; l <= j + 1; l++) {
+					if (l >= 0 && l < campo.length) {
+						if (campo[k][l].getQtdBombasVizinhas() == 0 && campo[k][l].isVisivel() == false) {
+							campo[k][l].setVisivel(true);
+							checarVazios(k, l);
+						}
+						else if(campo[k][l].getQtdBombasVizinhas()>0) {
+							campo[k][l].setVisivel(true);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	public void contarBombas() {
@@ -71,9 +108,9 @@ public abstract class Mapa {
 			for (int j = 0; j < campo.length; j++) {
 				if (campo[i][j].isBomba() == false) {
 					for (int k = i - 1; k <= i + 1; k++) {
-						if (k > 0 && k < campo.length) {
+						if (k >= 0 && k < campo.length) {
 							for (int l = j - 1; l <= j + 1; l++) {
-								if (l > 0 && l < campo.length) {
+								if (l >= 0 && l < campo.length) {
 									if (campo[k][l].isBomba() == true) {
 										campo[i][j].setQtdBombasVizinhas(campo[i][j].getQtdBombasVizinhas() + 1);
 									}
