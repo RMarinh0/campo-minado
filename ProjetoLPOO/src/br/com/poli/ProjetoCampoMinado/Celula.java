@@ -1,11 +1,11 @@
 package br.com.poli.ProjetoCampoMinado;
 
-public class Celula {
-	private boolean bandeira;
-	private boolean bomba;
-	private boolean visivel;
-	private int qtdBombasVizinhas;
-	
+public class Celula {//criação das células, que servirão como tipo dos elementos do array bidimensional "campo"
+	private boolean bandeira;//se a célula é uma bandeira ou não
+	private boolean bomba;//se a célula é uma bomba ou não
+	private boolean visivel;//se a célula está visível
+	private int qtdBombasVizinhas;//o número de células com o booleano bomba=true ao redor
+	//construtor que será inicializado no método inicializarCélulas
 	public Celula(boolean bandeira, boolean bomba, boolean visivel, int qtdBombasVizinhas) {
 		this.bandeira = bandeira;
 		this.bomba = bomba;

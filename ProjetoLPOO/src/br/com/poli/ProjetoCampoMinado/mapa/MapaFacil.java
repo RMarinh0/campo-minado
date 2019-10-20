@@ -1,10 +1,12 @@
-package br.com.poli.ProjetoCampoMinado;
+package br.com.poli.ProjetoCampoMinado.mapa;
+
+import br.com.poli.ProjetoCampoMinado.Dificuldade;
 
 public class MapaFacil extends Mapa {
-    private final static Dificuldade TAMANHO = Dificuldade.FACIL;
-    private final static int BOMBAS = 10;
+    public final static Dificuldade TAMANHO = Dificuldade.FACIL;//atribuição do tamanho do grid à dificuldade em questão
+    public final static int BOMBAS = 10;//atribuição do número de bombas que a matriz dessa dificuldade deve ter
 	public MapaFacil() {
-		super(BOMBAS, TAMANHO.getValor());
+		super(BOMBAS, TAMANHO.getValor());//construtor
 	}
     
 

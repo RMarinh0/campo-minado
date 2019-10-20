@@ -1,6 +1,9 @@
-package br.com.poli.ProjetoCampoMinado;
+package br.com.poli.ProjetoCampoMinado.mapa;
 
 import java.util.Random;
+
+import br.com.poli.ProjetoCampoMinado.Celula;
+import br.com.poli.ProjetoCampoMinado.Dificuldade;
 
 public abstract class Mapa {
 	private Celula[][] campo;
@@ -8,7 +11,7 @@ public abstract class Mapa {
 	private Dificuldade dificuldade;
 
 	public Mapa(int bombas, int tamanho) {
-		// a seguir, a inicialização do array campo, utilizando os valores da respectiva
+		// a seguir, a inicialização do array campo, utilizando os valores(tamanho) da respectiva
 		// dificuldade como "i" e "j"
 		this.campo = new Celula[tamanho][tamanho];
 		// implementação dos métodos no construtor da classe, com propósito de
@@ -20,29 +23,29 @@ public abstract class Mapa {
 	}
 
 	public void imprimeTela(boolean teste) {
-		// impressão da matrin nxn, com n sendo o valor da dificuldade escolhida
+		//impressão da matriz tamanhoxtamanho, com a expressão dos elementos dependendo do valor booleano "teste"
 		if (teste == true) {
-			for (int i = 0; i < campo.length; i++) {
-				for (int j = 0; j < campo.length; j++) {
+			for (int i = 0; i < campo.length; i++) {//se o teste for verdadeiro, o valor das células não será oculto,
+				for (int j = 0; j < campo.length; j++) {//permitindo a checagem do bom funcionamento da matriz
 					if (campo[i][j].isBomba() == false) {
-						System.out.print(" " + campo[i][j].getQtdBombasVizinhas());
-					} else {
+						System.out.print(" " + campo[i][j].getQtdBombasVizinhas());//se não for bomba, imprime vazio ou
+					} else {                                                       // o n° de bombas ao redor
 						System.out.print(" B");
 					}
 
 				}
 				System.out.println();
 			}
-		} else {
+		} else {//se o teste for falso, a matriz será impressa como se um jogo de verdade estiver acontecendo
 			for (int i = 0; i < campo.length; i++) {
 				for (int j = 0; j < campo.length; j++) {
-					if(campo[i][j].isVisivel()==false)
-					System.out.print(" -");
+					if(campo[i][j].isVisivel()==false)//se o elemento não for visível, uma interrogação será
+					System.out.print(" ?");           //impressa em seu lugar
 					else if(campo[i][j].isBomba()==true) 
 						System.out.print(" B");
 					else
 						System.out.print(" " + campo[i][j].getQtdBombasVizinhas());
-				}
+				}//repetição dos comandos da condição análoga, para que de qualquer forma as impressões sejam satisfeitas
 				System.out.println();
 			}
 		}
@@ -50,53 +53,53 @@ public abstract class Mapa {
 
 	private void distribuirBombas(int bombas) {
 		Random random = new Random();
-		for (int i = 0; i < bombas; i++) {// tendo em mente que o array tipo int é inicializado com todos os elementos
-			// como 0...
+		for (int i = 0; i < bombas; i++) {//a repetição do laço e colocação das bombas dependerá da dificuldade
 			int x = random.nextInt(campo.length);// uma linha aleatória do array
 			int y = random.nextInt(campo.length);// uma coluna aleatória do array
 			// ou seja, um elemento [x][y] aleatório
 			if (campo[x][y].isBomba() == false)
-				campo[x][y].setBomba(true);// para cada percorrida do array, um 0 aleatório será substituído por uma
-			else // bomba(-1)
+				campo[x][y].setBomba(true);// para cada percorrida do array, uma célula terá seu valor de bomba convertido
+			else                           // para "verdadeiro"
 				i--;// garantia de que um mesmo elemento não terá uma bomba posta em cima da outra
 		}
 	}
 
-	private void inicializarCelulas() {
+	private void inicializarCelulas() {//método que preenche o campo com Células
 		for (int i = 0; i < campo.length; i++) {
 			for (int j = 0; j < campo.length; j++) {
-				campo[i][j] = new Celula(false, false, false, 0);
-			}
+				campo[i][j] = new Celula(false, false, false, 0);//todas as células são inicializadas "zeradas",
+			}                                                    //modificações em seus valores ao decorrer do código
 		}
-		// quais os booleans que a célula deve ter quando for inicializada?
 	}
 
-	public void escolherPosicao(int linha, int coluna) {
-
+	public void escolherPosicao(int linha, int coluna) {//método que permite ao jogador escolher o elemento da matriz
+		                                                //em que deseja jogar
 		if (campo[linha][coluna].isBomba() == true) {
-			campo[linha][coluna].setVisivel(true);
+			campo[linha][coluna].setVisivel(true);//se a posição escolhida for uma bomba, o jogo é "encerrado"
 			System.out.println("FIM DE JOGO! VOCÊ PERDEU");
 		} else if (campo[linha][coluna].getQtdBombasVizinhas() > 0) {
-			campo[linha][coluna].setVisivel(true);
+			campo[linha][coluna].setVisivel(true);//se a posição tiver bombas ao redor, ela é revelada contendo o número
+			                                      //de bombas ao redor
 		} else if (campo[linha][coluna].getQtdBombasVizinhas() == 0) {
-			checarVazios(linha, coluna);
-		}
+			checarVazios(linha, coluna);//se a posição for vazia, o método checarVazios é acionado, usando recursividade
+		}                               //para revelar todos os vazios em volta, e parar quando achar uma não vazia que
+		                                //não seja uma bomba
 
-		imprimeTela(false);
-	}
+		imprimeTela(false);//ao final do método, a tela será impressa novamente com os valores atualizados, deixando os
+	}                      //inalterados invisíveis
 
-	public void checarVazios(int i, int j) {
-		for (int k = i - 1; k <= i + 1; k++) {
-			if (k >= 0 && k < campo.length) {
+	public void checarVazios(int i, int j) { //checar as posições vizinhas da posição escolhida(caso ela seja vazia)
+		for (int k = i - 1; k <= i + 1; k++) {//verificando as 8 casas em volta do elemento vazio da matriz,
+			if (k >= 0 && k < campo.length) { //fazendo adequadamente o flood fill dos vizinhos vazios
 				for (int l = j - 1; l <= j + 1; l++) {
 					if (l >= 0 && l < campo.length) {
 						if (campo[k][l].getQtdBombasVizinhas() == 0 && campo[k][l].isVisivel() == false) {
 							campo[k][l].setVisivel(true);
-							checarVazios(k, l);
-						}
+							checarVazios(k, l);//se o vizinho do elemento vazio também for vazio, ele torna-se visível
+						}                      //e o método é acionado novamente, mas em função desse vizinho vazio
 						else if(campo[k][l].getQtdBombasVizinhas()>0) {
-							campo[k][l].setVisivel(true);
-						}
+							campo[k][l].setVisivel(true);//se o vizinho não for vazio e não for bomba, ele simplesmente
+						}                                //torna-se visível e a checagem é encerrada
 					}
 				}
 			}
@@ -104,16 +107,16 @@ public abstract class Mapa {
 	}
 
 	public void contarBombas() {
-		for (int i = 0; i < campo.length; i++) {
+		for (int i = 0; i < campo.length; i++) {//varre toda a matriz	
 			for (int j = 0; j < campo.length; j++) {
-				if (campo[i][j].isBomba() == false) {
-					for (int k = i - 1; k <= i + 1; k++) {
-						if (k >= 0 && k < campo.length) {
+				if (campo[i][j].isBomba() == false) {//acha as posições sem bomba
+					for (int k = i - 1; k <= i + 1; k++) {//verifica as 8 casas vizinhas dessas posições
+						if (k >= 0 && k < campo.length) {//condição que evita o ArrayOutOfBounds
 							for (int l = j - 1; l <= j + 1; l++) {
 								if (l >= 0 && l < campo.length) {
-									if (campo[k][l].isBomba() == true) {
+									if (campo[k][l].isBomba() == true) {//se o vizinho for bomba...
 										campo[i][j].setQtdBombasVizinhas(campo[i][j].getQtdBombasVizinhas() + 1);
-									}
+									} //...o valor de bombas vizinhas é alterado e posteriormente impresso na célula
 								}
 							}
 						}

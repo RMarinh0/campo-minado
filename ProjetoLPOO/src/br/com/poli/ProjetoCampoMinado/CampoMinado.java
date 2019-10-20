@@ -1,5 +1,10 @@
 package br.com.poli.ProjetoCampoMinado;
 
+import br.com.poli.ProjetoCampoMinado.mapa.Mapa;
+import br.com.poli.ProjetoCampoMinado.mapa.MapaDificil;
+import br.com.poli.ProjetoCampoMinado.mapa.MapaFacil;
+import br.com.poli.ProjetoCampoMinado.mapa.MapaMedio;
+
 public class CampoMinado {
 	private Jogador jogador;
 	private Dificuldade dificuldade;
