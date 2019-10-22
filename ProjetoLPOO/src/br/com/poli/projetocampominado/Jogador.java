@@ -1,4 +1,4 @@
-package br.com.poli.ProjetoCampoMinado;
+package br.com.poli.projetocampominado;
 
 public class Jogador {
 	// classe contendo apenas o nome do jogador como atributo e seu método getter

@@ -1,6 +1,6 @@
-package br.com.poli.ProjetoCampoMinado.mapa;
+package br.com.poli.projetocampominado.mapa;
 
-import br.com.poli.ProjetoCampoMinado.Dificuldade;
+import br.com.poli.projetocampominado.Dificuldade;
 
 public class MapaDificil extends Mapa{
      public final static Dificuldade TAMANHO = Dificuldade.DIFICIL;//atribuição do tamanho do grid à dificuldade em questão

@@ -1,4 +1,4 @@
-package br.com.poli.ProjetoCampoMinado;
+package br.com.poli.projetocampominado;
 
 public enum Dificuldade {
 

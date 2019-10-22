@@ -1,9 +1,9 @@
-package br.com.poli.ProjetoCampoMinado;
+package br.com.poli.projetocampominado;
 
-import br.com.poli.ProjetoCampoMinado.mapa.Mapa;
-import br.com.poli.ProjetoCampoMinado.mapa.MapaDificil;
-import br.com.poli.ProjetoCampoMinado.mapa.MapaFacil;
-import br.com.poli.ProjetoCampoMinado.mapa.MapaMedio;
+import br.com.poli.projetocampominado.mapa.Mapa;
+import br.com.poli.projetocampominado.mapa.MapaDificil;
+import br.com.poli.projetocampominado.mapa.MapaFacil;
+import br.com.poli.projetocampominado.mapa.MapaMedio;
 
 public class CampoMinado {
 	private Jogador jogador;

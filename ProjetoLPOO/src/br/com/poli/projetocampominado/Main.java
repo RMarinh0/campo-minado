@@ -1,4 +1,4 @@
-package br.com.poli.ProjetoCampoMinado;
+package br.com.poli.projetocampominado;
 // Arthur Falcão - Rafael Marinho
 public class Main {
 	public static void main(String[] args) {

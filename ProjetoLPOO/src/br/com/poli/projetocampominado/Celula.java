@@ -1,4 +1,4 @@
-package br.com.poli.ProjetoCampoMinado;
+package br.com.poli.projetocampominado;
 
 public class Celula {//criação das células, que servirão como tipo dos elementos do array bidimensional "campo"
 	private boolean bandeira;//se a célula é uma bandeira ou não
