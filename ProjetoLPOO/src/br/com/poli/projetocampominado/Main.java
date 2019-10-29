@@ -9,7 +9,7 @@ public class Main {
         teste.getMapa().escolherPosicao(0,0);//primeira linha e primeira coluna
         System.out.println();
         teste.getMapa().imprimeTela(true);
-        
+        /*
         System.out.println("----------------------------------------------------------------");
         
         CampoMinado testemedio = new CampoMinado("Beltrano",Dificuldade.MEDIO);
@@ -28,6 +28,6 @@ public class Main {
         System.out.println();
         testedificil.getMapa().imprimeTela(true);
 
-
+*/
 	}
 }
