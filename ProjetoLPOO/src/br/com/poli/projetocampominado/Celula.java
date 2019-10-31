@@ -14,27 +14,28 @@ public class Celula {// criação das células, que servirão como tipo dos elemento
 	private ArrayList<Celula> vizinhos = new ArrayList<Celula>();
 
 	// construtor que será inicializado no método inicializarCélulas
-	public Celula(/*boolean bandeira, boolean bomba, boolean visivel, int qtdBombasVizinhas, */int linha, int coluna) {
-		/*this.bandeira = bandeira;
-		this.bomba = bomba;
-		this.visivel = visivel;
-		this.qtdBombasVizinhas = qtdBombasVizinhas;*/
+	public Celula(boolean bandeira, boolean bomba, boolean visivel, int qtdBombasVizinhas, int linha, int coluna) {
+		
+		 this.bandeira = bandeira; 
+		 this.bomba = bomba;
+		 this.visivel = visivel;
+		 this.qtdBombasVizinhas = qtdBombasVizinhas;
+		 
 		this.linha = linha;
 		this.coluna = coluna;
 	}
 
-	/*public void buscarVizinhos(Celula[][] campo) {
-		for (int k = i - 1; k <= i + 1; k++) {
-			if (k >= 0 && k < campo.length) {
-				for (int l = j - 1; l <= j + 1; l++) {
+	public void buscarVizinhos(Celula[][] campo) {
+		for (int k = linha - 1; k <= linha + 1; k++) {// verificando as 8 casas em volta do elemento vazio da matriz,
+			if (k >= 0 && k < campo.length) { // fazendo adequadamente o flood fill dos vizinhos vazios
+				for (int l = coluna - 1; l <= coluna + 1; l++) {
 					if (l >= 0 && l < campo.length) {
-						vizinhos.add(campo[k][l]);// vai ser inicilizado na revelarEspacos e ir adicionando os vizinhos
-											      // na lista
+						campo[linha][coluna].vizinhos.add(campo[k][l]);
 					}
 				}
 			}
 		}
-	}*/
+	}
 
 	public boolean isEmBranco() {
 		if (qtdBombasVizinhas == 0)

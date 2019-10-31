@@ -4,6 +4,7 @@ import br.com.poli.projetocampominado.mapa.Mapa;
 import br.com.poli.projetocampominado.mapa.MapaDificil;
 import br.com.poli.projetocampominado.mapa.MapaFacil;
 import br.com.poli.projetocampominado.mapa.MapaMedio;
+import java.util.Scanner;
 
 public class CampoMinado {
 	private Jogador jogador;
@@ -15,7 +16,7 @@ public class CampoMinado {
 		this.jogador = new Jogador(nome);
 		this.dificuldade = dificuldade;
 		// o paramêtro dificuldade será aproveitado para a formação do mapa
-		switch(dificuldade) {
+		switch (dificuldade) {
 		case FACIL:
 			this.mapa = new MapaFacil();
 			break;
@@ -26,7 +27,21 @@ public class CampoMinado {
 			this.mapa = new MapaDificil();
 			break;
 		}
-		
+		iniciarJogo();
+
+	}
+
+	public void iniciarJogo() {
+		do {
+			Scanner scan = new Scanner(System.in);
+			System.out.println("Informe a linha: ");
+			int i = scan.nextInt();
+			System.out.println("Informe a coluna: ");
+			int j = scan.nextInt();
+			mapa.escolherPosicao(i - 1, j - 1);
+			mapa.verificarGanhouJogo();
+
+		} while (mapa.isFimDeJogo() == false || mapa.isGanhouJogo() == false);
 	}
 
 	public Jogador getJogador() {
@@ -52,6 +67,5 @@ public class CampoMinado {
 	public void setMapa(Mapa mapa) {
 		this.mapa = mapa;
 	}
-	
 
 }

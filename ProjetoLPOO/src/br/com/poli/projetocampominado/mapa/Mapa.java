@@ -72,7 +72,7 @@ public abstract class Mapa {
 	private void inicializarCelulas() {//método que preenche o campo com Células
 		for (int i = 0; i < campo.length; i++) {
 			for (int j = 0; j < campo.length; j++) {
-				campo[i][j] = new Celula(/*false, false, false, 0,*/0,0);//todas as células são inicializadas "zeradas",
+				campo[i][j] = new Celula(false, false, false, 0,0,0);//todas as células são inicializadas "zeradas",
 			}                                                    //modificações em seus valores ao decorrer do código
 		}
 	}
@@ -91,7 +91,6 @@ public abstract class Mapa {
 			revelarEspacos(linha, coluna);//se a posição for vazia, o método revelarEspacos é acionado, usando recursividade
 		}                               //para revelar todos os vazios em volta, e parar quando achar uma não vazia que
 		                                //não seja uma bomba
-        //buscarVizinhos(campo, linha, coluna);
 		imprimeTela(false);//ao final do método, a tela será impressa novamente com os valores atualizados, deixando os inalterados invisíveis
 		verificarGanhouJogo();
 		System.out.println(celulasVisiveis);
@@ -105,6 +104,7 @@ public abstract class Mapa {
 						if (campo[k][l].isEmBranco()==true&& campo[k][l].isVisivel() == false) {
 							campo[k][l].setVisivel(true);
 							celulasVisiveis++;
+							//campo[k][l].buscarVizinhos(campo);
 							revelarEspacos(k, l);//se o vizinho do elemento vazio também for vazio, ele torna-se visível
 						}                      //e o método é acionado novamente, mas em função desse vizinho vazio
 						else if(campo[k][l].isEmBranco()==false && campo[k][l].isVisivel()==false) {
