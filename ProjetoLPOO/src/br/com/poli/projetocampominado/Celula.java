@@ -14,12 +14,12 @@ public class Celula {// criação das células, que servirão como tipo dos elemento
 	private ArrayList<Celula> vizinhos = new ArrayList<Celula>();
 
 	// construtor que será inicializado no método inicializarCélulas
-	public Celula(boolean bandeira, boolean bomba, boolean visivel, int qtdBombasVizinhas, int linha, int coluna) {
+	public Celula(/*boolean bandeira, boolean bomba, boolean visivel, int qtdBombasVizinhas, */int linha, int coluna) {
 		
-		 this.bandeira = bandeira; 
+		 /*this.bandeira = bandeira; 
 		 this.bomba = bomba;
 		 this.visivel = visivel;
-		 this.qtdBombasVizinhas = qtdBombasVizinhas;
+		 this.qtdBombasVizinhas = qtdBombasVizinhas;*/
 		 
 		this.linha = linha;
 		this.coluna = coluna;

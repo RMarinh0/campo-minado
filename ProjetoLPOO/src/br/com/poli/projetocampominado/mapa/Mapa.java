@@ -45,7 +45,7 @@ public abstract class Mapa {
 			for (int i = 0; i < campo.length; i++) {
 				for (int j = 0; j < campo.length; j++) {
 					if(campo[i][j].isVisivel()==false)//se o elemento não for visível, uma interrogação será
-					System.out.print(" ?");           //impressa em seu lugar
+					System.out.print(" -");           //impressa em seu lugar
 					else if(campo[i][j].isBomba()==true) 
 						System.out.print(" B");
 					else
@@ -72,7 +72,7 @@ public abstract class Mapa {
 	private void inicializarCelulas() {//método que preenche o campo com Células
 		for (int i = 0; i < campo.length; i++) {
 			for (int j = 0; j < campo.length; j++) {
-				campo[i][j] = new Celula(false, false, false, 0,0,0);//todas as células são inicializadas "zeradas",
+				campo[i][j] = new Celula(/*false, false, false, 0,*/0,0);//todas as células são inicializadas "zeradas",
 			}                                                    //modificações em seus valores ao decorrer do código
 		}
 	}
@@ -81,8 +81,8 @@ public abstract class Mapa {
 		                                                //em que deseja jogar
 		if (campo[linha][coluna].isBomba() == true) {
 			campo[linha][coluna].setVisivel(true);//se a posição escolhida for uma bomba, o jogo é "encerrado"
-			this.fimDeJogo = true;
-			System.out.println("FIM DE JOGO! VOCÊ PERDEU");
+			System.out.println("Fim de Jogo! Você perdeu!");
+            fimDeJogo = true;
 		} else if (campo[linha][coluna].isEmBranco()==false) {
 			campo[linha][coluna].setVisivel(true);//se a posição tiver bombas ao redor, ela é revelada contendo o número
 			                                      //de bombas ao redor
@@ -93,7 +93,6 @@ public abstract class Mapa {
 		                                //não seja uma bomba
 		imprimeTela(false);//ao final do método, a tela será impressa novamente com os valores atualizados, deixando os inalterados invisíveis
 		verificarGanhouJogo();
-		System.out.println(celulasVisiveis);
 	}       
 
 	public void revelarEspacos(int i, int j) { //checar as posições vizinhas da posição escolhida(caso ela seja vazia)
@@ -141,6 +140,7 @@ public abstract class Mapa {
 		if(this.celulasVisiveis>=(this.campo.length*this.campo.length)-this.bombas)
 		{   
 			System.out.println("Você ganhou o jogo!!!");
+			fimDeJogo=true;
 			return this.ganhouJogo=true;
 		}
 		else{

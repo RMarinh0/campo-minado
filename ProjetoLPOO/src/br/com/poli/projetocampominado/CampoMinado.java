@@ -27,6 +27,7 @@ public class CampoMinado {
 			this.mapa = new MapaDificil();
 			break;
 		}
+		mapa.imprimeTela(false);
 		iniciarJogo();
 
 	}
@@ -34,14 +35,18 @@ public class CampoMinado {
 	public void iniciarJogo() {
 		do {
 			Scanner scan = new Scanner(System.in);
+			int i, j;
 			System.out.println("Informe a linha: ");
-			int i = scan.nextInt();
+			i = scan.nextInt();
 			System.out.println("Informe a coluna: ");
-			int j = scan.nextInt();
-			mapa.escolherPosicao(i - 1, j - 1);
-			mapa.verificarGanhouJogo();
+			j = scan.nextInt();
+			if (i > 0 && i <= mapa.getCampo().length && j > 0 && j <= mapa.getCampo().length) {
+				mapa.escolherPosicao(i - 1, j - 1);
+				mapa.verificarGanhouJogo();
+			} else
+				iniciarJogo();
 
-		} while (mapa.isFimDeJogo() == false || mapa.isGanhouJogo() == false);
+		} while (mapa.isFimDeJogo() == false && mapa.isGanhouJogo() == false);
 	}
 
 	public Jogador getJogador() {
