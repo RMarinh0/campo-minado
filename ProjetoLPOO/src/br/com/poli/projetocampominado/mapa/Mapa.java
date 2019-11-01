@@ -35,7 +35,7 @@ public abstract class Mapa {
 					if (campo[i][j].isBomba() == false) {
 						System.out.print(" " + campo[i][j].getQtdBombasVizinhas());//se não for bomba, imprime vazio ou
 					} else {                                                       // o n° de bombas ao redor
-						System.out.print(" B");
+						System.out.print(" @");
 					}
 
 				}
@@ -47,7 +47,7 @@ public abstract class Mapa {
 					if(campo[i][j].isVisivel()==false)//se o elemento não for visível, uma interrogação será
 					System.out.print(" -");           //impressa em seu lugar
 					else if(campo[i][j].isBomba()==true) 
-						System.out.print(" B");
+						System.out.print(" @");
 					else
 						System.out.print(" " + campo[i][j].getQtdBombasVizinhas());
 				}//repetição dos comandos da condição análoga, para que de qualquer forma as impressões sejam satisfeitas
@@ -72,7 +72,7 @@ public abstract class Mapa {
 	private void inicializarCelulas() {//método que preenche o campo com Células
 		for (int i = 0; i < campo.length; i++) {
 			for (int j = 0; j < campo.length; j++) {
-				campo[i][j] = new Celula(/*false, false, false, 0,*/0,0);//todas as células são inicializadas "zeradas",
+				campo[i][j] = new Celula(/*false, false, false, 0,*/i,j);//todas as células são inicializadas "zeradas",
 			}                                                    //modificações em seus valores ao decorrer do código
 		}
 	}
@@ -88,26 +88,26 @@ public abstract class Mapa {
 			                                      //de bombas ao redor
 			celulasVisiveis++;
 		} else if (campo[linha][coluna].isEmBranco()==true) {
-			revelarEspacos(linha, coluna);//se a posição for vazia, o método revelarEspacos é acionado, usando recursividade
+			revelarEspacos(getCelula(linha,coluna));//se a posição for vazia, o método revelarEspacos é acionado, usando recursividade
 		}                               //para revelar todos os vazios em volta, e parar quando achar uma não vazia que
 		                                //não seja uma bomba
 		imprimeTela(false);//ao final do método, a tela será impressa novamente com os valores atualizados, deixando os inalterados invisíveis
 		verificarGanhouJogo();
 	}       
 
-	public void revelarEspacos(int i, int j) { //checar as posições vizinhas da posição escolhida(caso ela seja vazia)
-		for (int k = i - 1; k <= i + 1; k++) {//verificando as 8 casas em volta do elemento vazio da matriz,
+	public void revelarEspacos(Celula celulaEscolhida) { //checar as posições vizinhas da posição escolhida(caso ela seja vazia)
+		for (int k = celulaEscolhida.getLinha() - 1; k <= celulaEscolhida.getLinha() + 1; k++) {//verificando as 8 casas em volta do elemento vazio da matriz,
 			if (k >= 0 && k < campo.length) { //fazendo adequadamente o flood fill dos vizinhos vazios
-				for (int l = j - 1; l <= j + 1; l++) {
+				for (int l = celulaEscolhida.getColuna() - 1; l <= celulaEscolhida.getColuna() + 1; l++) {
 					if (l >= 0 && l < campo.length) {
-						if (campo[k][l].isEmBranco()==true&& campo[k][l].isVisivel() == false) {
-							campo[k][l].setVisivel(true);
+						if (getCelula(k,l).isEmBranco()==true&& getCelula(k,l).isVisivel() == false) {
+							getCelula(k,l).setVisivel(true);
 							celulasVisiveis++;
 							//campo[k][l].buscarVizinhos(campo);
-							revelarEspacos(k, l);//se o vizinho do elemento vazio também for vazio, ele torna-se visível
+							revelarEspacos(getCelula(k,l));//se o vizinho do elemento vazio também for vazio, ele torna-se visível
 						}                      //e o método é acionado novamente, mas em função desse vizinho vazio
-						else if(campo[k][l].isEmBranco()==false && campo[k][l].isVisivel()==false) {
-							campo[k][l].setVisivel(true);//se o vizinho não for vazio e não for bomba, ele simplesmente torna-se visível e a checagem é encerrada
+						else if(getCelula(k,l).isEmBranco()==false && getCelula(k,l).isVisivel()==false) {
+							getCelula(k,l).setVisivel(true);//se o vizinho não for vazio e não for bomba, ele simplesmente torna-se visível e a checagem é encerrada
 							celulasVisiveis++;
 						}                                
 					}

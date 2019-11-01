@@ -27,6 +27,7 @@ public class CampoMinado {
 			this.mapa = new MapaDificil();
 			break;
 		}
+		System.out.println("Bem vindo, "+nome+"!");
 		mapa.imprimeTela(false);
 		iniciarJogo();
 
