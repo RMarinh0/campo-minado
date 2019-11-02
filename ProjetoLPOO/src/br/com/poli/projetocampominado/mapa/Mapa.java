@@ -61,6 +61,10 @@ public abstract class Mapa {
 		}
 	}
 
+	public void setFimDeJogo(boolean fimDeJogo) {
+		this.fimDeJogo = fimDeJogo;
+	}
+
 	private void distribuirBombas(int bombas) {
 		Random random = new Random();
 		for (int i = 0; i < bombas; i++) {// a repetição do laço e colocação das bombas dependerá da dificuldade
