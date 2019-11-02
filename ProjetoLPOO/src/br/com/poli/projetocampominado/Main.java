@@ -5,14 +5,14 @@ public class Main {
 	    //exemplos com cada dificuldade
 		CampoMinado teste = new CampoMinado("Fulano",Dificuldade.FACIL);
 
-        /*System.out.println("----------------------------------------------------------------");
+        //System.out.println("----------------------------------------------------------------");
         
-        CampoMinado testemedio = new CampoMinado("Beltrano",Dificuldade.MEDIO);
+        //CampoMinado testemedio = new CampoMinado("Beltrano",Dificuldade.MEDIO);
         
-        System.out.println("----------------------------------------------------------------");
+        //System.out.println("----------------------------------------------------------------");
         
-        CampoMinado testedificil = new CampoMinado("Sicrano",Dificuldade.DIFICIL);
+        //CampoMinado testedificil = new CampoMinado("Sicrano",Dificuldade.DIFICIL);
 
-*/
+
 	}
 }
