@@ -14,13 +14,9 @@ public class Celula {// criação das células, que servirão como tipo dos elemento
 	private ArrayList<Celula> vizinhos = new ArrayList<Celula>();
 
 	// construtor que será inicializado no método inicializarCélulas
-	public Celula(/* boolean bandeira, boolean bomba, boolean visivel, int qtdBombasVizinhas, */int linha, int coluna) {
-
-		/*
-		 * this.bandeira = bandeira; this.bomba = bomba; this.visivel = visivel;
-		 * this.qtdBombasVizinhas = qtdBombasVizinhas;
-		 */
-
+	public Celula(int linha, int coluna) {
+       //não será mais necessário inicializar bombas, bandeiras, visibilidade ou quantidade de bombas no construtor, já que existem métodos que
+	   //automaticamente alteram o valor dessas variáveis ao inicializar as células
 		this.linha = linha;
 		this.coluna = coluna;
 	}
@@ -28,12 +24,12 @@ public class Celula {// criação das células, que servirão como tipo dos elemento
 	public void buscarVizinhos(Celula[][] campo) {
 		for (int i = 0; i < campo.length; i++) {
 			for (int j = 0; j < campo.length; j++) {
-				for (int k = i - 1; k <= i + 1; k++) {// verificando as 8 casas em volta do elemento vazio da matriz,
-					if (k >= 0 && k < campo.length) { // fazendo adequadamente o flood fill dos vizinhos vazios
+				for (int k = i - 1; k <= i + 1; k++) {// verificando as 8 casas em volta do elemento vazio da matriz(vizinhos)
+					if (k >= 0 && k < campo.length) { 
 						for (int l = j - 1; l <= j + 1; l++) {
 							if (l >= 0 && l < campo.length) {
-								campo[i][j].vizinhos.add(campo[k][l]);
-
+								campo[i][j].vizinhos.add(campo[k][l]);//cada matriz terá uma lista contendo cada uma de suas células vizinhas
+                                                                      //além de ajudar no clean code, buscarVizinhos agilizará o método revelarEspaços()
 							}
 						}
 					}
@@ -42,7 +38,7 @@ public class Celula {// criação das células, que servirão como tipo dos elemento
 		}
 	}
 
-	public boolean isEmBranco() {
+	public boolean isEmBranco() {//método que verifica se a célula em questão é um espaço em branco
 		if (qtdBombasVizinhas == 0)
 			return true;
 		else

@@ -33,7 +33,8 @@ public class CampoMinado {
 
 	}
 
-	public void iniciarJogo() {
+	public void iniciarJogo() {//método pilar do jogo que continuará pedindo coordenadas de células enquanto não achar uma bomba ou atingir
+		                       //a condição de vitória
 		do {
 			Scanner scan = new Scanner(System.in);
 			int i, j;
