@@ -1,4 +1,8 @@
 package br.com.poli.projetocampominado;
+
+import jogo.CampoMinado;
+import jogo.Dificuldade;
+
 // Arthur Falcão - Rafael Marinho
 public class Main {
 	public static void main(String[] args) {

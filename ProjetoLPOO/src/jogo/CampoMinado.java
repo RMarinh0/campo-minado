@@ -1,10 +1,12 @@
-package br.com.poli.projetocampominado;
+package jogo;
 
-import br.com.poli.projetocampominado.mapa.Mapa;
-import br.com.poli.projetocampominado.mapa.MapaDificil;
-import br.com.poli.projetocampominado.mapa.MapaFacil;
-import br.com.poli.projetocampominado.mapa.MapaMedio;
 import java.util.Scanner;
+
+import br.com.poli.projetocampominado.Jogador;
+import mapa.Mapa;
+import mapa.MapaDificil;
+import mapa.MapaFacil;
+import mapa.MapaMedio;
 
 public class CampoMinado {
 	private Jogador jogador;

@@ -1,9 +1,8 @@
-package br.com.poli.projetocampominado.mapa;
+package mapa;
 
 import java.util.Random;
 
-import br.com.poli.projetocampominado.Celula;
-import br.com.poli.projetocampominado.Dificuldade;
+import jogo.Dificuldade;
 
 public abstract class Mapa {
 	private Celula[][] campo;

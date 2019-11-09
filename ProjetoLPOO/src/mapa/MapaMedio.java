@@ -1,6 +1,6 @@
-package br.com.poli.projetocampominado.mapa;
+package mapa;
 
-import br.com.poli.projetocampominado.Dificuldade;
+import jogo.Dificuldade;
 
 public class MapaMedio extends Mapa {
      public final static Dificuldade TAMANHO = Dificuldade.MEDIO;//atribuição do tamanho do grid à dificuldade em questão

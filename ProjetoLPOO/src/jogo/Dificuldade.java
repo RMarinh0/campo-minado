@@ -1,4 +1,4 @@
-package br.com.poli.projetocampominado;
+package jogo;
 
 public enum Dificuldade {
 
