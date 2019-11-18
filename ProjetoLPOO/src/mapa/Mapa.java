@@ -11,8 +11,10 @@ public abstract class Mapa {
 	private int bombas;
 	private boolean fimDeJogo;
 	private boolean ganhouJogo;
-	private int celulasVisiveis;//cada vez que uma célula tornar-se visível, com exceção da bomba, essa variável será incrementada para garantir
-                                //a condição de vitória
+	private int celulasVisiveis;// cada vez que uma célula tornar-se visível, com exceção da bomba, essa
+								// variável será incrementada para garantir
+								// a condição de vitória
+
 	public Mapa(int bombas, int tamanho) {
 		// a seguir, a inicialização do array campo, utilizando os valores(tamanho) da
 		// respectiva
@@ -25,7 +27,8 @@ public abstract class Mapa {
 		inicializarCelulas();
 		distribuirBombas(bombas);
 		contarBombas();
-		percorrerVizinhos(campo);//assim que for criado o mapa, esse método dará a cada célula uma lista com seus respectivos vizinhos
+		percorrerVizinhos(campo);// assim que for criado o mapa, esse método dará a cada célula uma lista com
+									// seus respectivos vizinhos
 
 	}
 
@@ -36,19 +39,22 @@ public abstract class Mapa {
 			for (int i = 0; i < campo.length; i++) {// se o teste for verdadeiro, o valor das células não será oculto,
 				for (int j = 0; j < campo.length; j++) {// permitindo a checagem do bom funcionamento da matriz
 					if (campo[i][j].isBomba() == false) {
-						System.out.print(" " + campo[i][j].getQtdBombasVizinhas());// se não for bomba, imprime vazio ou o n° de bombas ao redor
-					} else { 
+						System.out.print(" " + campo[i][j].getQtdBombasVizinhas());// se não for bomba, imprime vazio ou
+																					// o n° de bombas ao redor
+					} else {
 						System.out.print(" @");
 					}
 
 				}
 				System.out.println();
 			}
-		} else {// se o teste for falso, a matriz será impressa como se um jogo de verdade estiver acontecendo
+		} else {// se o teste for falso, a matriz será impressa como se um jogo de verdade
+				// estiver acontecendo
 			for (int i = 0; i < campo.length; i++) {
 				for (int j = 0; j < campo.length; j++) {
-					if (campo[i][j].isVisivel() == false)// se o elemento não for visível, uma interrogação será impressa em seu lugar
-						System.out.print(" -"); 
+					if (campo[i][j].isVisivel() == false)// se o elemento não for visível, uma interrogação será
+															// impressa em seu lugar
+						System.out.print(" -");
 					else if (campo[i][j].isBomba() == true)
 						System.out.print(" @");
 					else
@@ -59,6 +65,7 @@ public abstract class Mapa {
 			}
 		}
 	}
+
 	private void distribuirBombas(int bombas) {
 		Random random = new Random();
 		for (int i = 0; i < bombas; i++) {// a repetição do laço e colocação das bombas dependerá da dificuldade
@@ -68,7 +75,7 @@ public abstract class Mapa {
 			if (getCelula(x, y).isBomba() == false)
 				getCelula(x, y).setBomba(true);// para cada percorrida do array, uma célula terá seu valor de bomba
 												// convertido para "verdadeiro"
-			else 
+			else
 				i--;// garantia de que um mesmo elemento não terá uma bomba posta em cima da outra
 		}
 	}
@@ -90,29 +97,35 @@ public abstract class Mapa {
 		} else if (campo[linha][coluna].isEmBranco() == false) {
 			getCelula(linha, coluna).setVisivel(true);// se a posição tiver bombas ao redor, ela é revelada contendo o
 														// número de bombas ao redor
-														
+
 			celulasVisiveis++;
 		} else if (getCelula(linha, coluna).isEmBranco() == true) {
-			revelarEspacos(getCelula(linha, coluna));//    se a posição for vazia, o método revelarEspacos é acionado,
-														// usando recursividade  para revelar todos os vazios em volta,
-		}    //                                            e parar quando achar uma não vazia que não seja uma bomba
-			
+			revelarEspacos(getCelula(linha, coluna));// se a posição for vazia, o método revelarEspacos é acionado,
+														// usando recursividade para revelar todos os vazios em volta,
+		} // e parar quando achar uma não vazia que não seja uma bomba
+
 		imprimeTela(false);// ao final do método, a tela será impressa novamente com os valores
 							// atualizados, deixando os inalterados invisíveis
 		verificarGanhouJogo();
 	}
 
-	public void revelarEspacos(Celula celulaEscolhida) { 
-		for (Celula celula : celulaEscolhida.getVizinhos()) {//for que percorre os vizinhos que constam na lista de vizinhos da célula escolhida,
-			if (campo[celula.getLinha()][celula.getColuna()].isEmBranco() == true//sendo "celula" uma representação "descartável" desses vizinhos
+	public void revelarEspacos(Celula celulaEscolhida) {
+		for (Celula celula : celulaEscolhida.getVizinhos()) {// for que percorre os vizinhos que constam na lista de
+																// vizinhos da célula escolhida,
+			if (campo[celula.getLinha()][celula.getColuna()].isEmBranco() == true// sendo "celula" uma representação
+																					// "descartável" desses vizinhos
 					&& campo[celula.getLinha()][celula.getColuna()].isVisivel() == false) {
-				campo[celula.getLinha()][celula.getColuna()].setVisivel(true);//se o vizinho for branco, tornará-se visível...
+				campo[celula.getLinha()][celula.getColuna()].setVisivel(true);// se o vizinho for branco, tornará-se
+																				// visível...
 				celulasVisiveis++;
-				revelarEspacos(campo[celula.getLinha()][celula.getColuna()]);//...e o método será acionado recursivamente para esse vizinho, fazendo o flood fill 
+				revelarEspacos(campo[celula.getLinha()][celula.getColuna()]);// ...e o método será acionado
+																				// recursivamente para esse vizinho,
+																				// fazendo o flood fill
 			} else if (campo[celula.getLinha()][celula.getColuna()].isEmBranco() == false
 					&& campo[celula.getLinha()][celula.getColuna()].isVisivel() == false) {
-				campo[celula.getLinha()][celula.getColuna()].setVisivel(true);//se a célula não for bomba e não for vazia, ela torna-se visível
-				celulasVisiveis++;                                            //e o método é encerrado
+				campo[celula.getLinha()][celula.getColuna()].setVisivel(true);// se a célula não for bomba e não for
+																				// vazia, ela torna-se visível
+				celulasVisiveis++; // e o método é encerrado
 			}
 		}
 	}
@@ -142,8 +155,9 @@ public abstract class Mapa {
 																							// jogador
 			System.out.println("Você ganhou o jogo!!!");
 			fimDeJogo = true;// determina o fim do jogo caso a condição seja satisfeita
-			return this.ganhouJogo = true;// altera o valor de ganhouJogo, que será usado em iniciarJogo() da classe CampoMinado
-											
+			return this.ganhouJogo = true;// altera o valor de ganhouJogo, que será usado em iniciarJogo() da classe
+											// CampoMinado
+
 		} else {
 			return this.ganhouJogo = false;
 		}
