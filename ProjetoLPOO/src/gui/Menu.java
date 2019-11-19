@@ -34,9 +34,7 @@ public class Menu extends JFrame {
 	private TelaJogo tela;
 	private Jogador jogador;
 
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -108,12 +106,11 @@ public class Menu extends JFrame {
 				if (comboBoxDificuldade.getSelectedIndex() != -1) {
 					if (comboBoxDificuldade.getSelectedIndex() == 0) {
 						tela = new TelaJogo(Dificuldade.FACIL);
-
 					} else if (comboBoxDificuldade.getSelectedIndex() == 1) {
 						tela = new TelaJogo(Dificuldade.MEDIO);
 					} else if (comboBoxDificuldade.getSelectedIndex() == 2) {
 						tela = new TelaJogo(Dificuldade.DIFICIL);
-
+                        
 					}
 				}
 				

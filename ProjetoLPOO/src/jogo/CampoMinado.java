@@ -31,7 +31,7 @@ public class CampoMinado {
 		}
 		System.out.println("Bem vindo, "+nome+"!");
 		mapa.imprimeTela(false);
-		iniciarJogo();
+		//iniciarJogo();
 
 	}
 
