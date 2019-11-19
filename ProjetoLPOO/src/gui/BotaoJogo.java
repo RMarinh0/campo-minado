@@ -24,8 +24,15 @@ public class BotaoJogo extends JButton {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (SwingUtilities.isRightMouseButton(e) == true) {
-					tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).setBandeira(true);
-					tela.botoes[getLinha()][getColuna()].setText("F");
+					if (!tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).isBandeira()) {
+						tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).setBandeira(true);
+						tela.botoes[getLinha()][getColuna()].setText("^");
+						tela.botoes[getLinha()][getColuna()].setEnabled(false);
+					} else {
+						tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).setBandeira(false);
+						tela.botoes[getLinha()][getColuna()].setText("");
+						tela.botoes[getLinha()][getColuna()].setEnabled(true);
+					}
 				}
 			}
 		});
@@ -66,20 +73,6 @@ public class BotaoJogo extends JButton {
 		});
 	}
 
-	/*
-	 * public void setarBandeiras(TelaJogo tela) {
-	 * 
-	 * for ( linha = 0; linha < tela.campoMinado.getDificuldade().getValor();
-	 * linha++) { for ( coluna = 0; coluna <
-	 * tela.campoMinado.getDificuldade().getValor(); coluna++) {
-	 * tela.botoes[getLinha()][getColuna()].addMouseListener(new MouseAdapter(){
-	 * public void MousePressed(MouseEvent e) {
-	 * if(SwingUtilities.isRightMouseButton(e)) {
-	 * tela.campoMinado.getMapa().getCelula(getLinha(),
-	 * getColuna()).setBandeira(true);
-	 * tela.botoes[getLinha()][getColuna()].setText("F"); } } }); } } }
-	 */
-
 	public void printarBotoesCelula(TelaJogo tela) {
 		for (int i = 0; i < tela.campoMinado.getDificuldade().getValor(); i++) {
 			for (int j = 0; j < tela.campoMinado.getDificuldade().getValor(); j++) {
@@ -101,8 +94,6 @@ public class BotaoJogo extends JButton {
 			Menu menu = new Menu();
 			menu.setVisible(true);
 		}
-		// setarBandeiras(tela);
-
 	}
 
 	public int getLinha() {

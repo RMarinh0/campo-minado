@@ -58,9 +58,10 @@ public class TelaJogo extends JFrame {
 					botoes[line][column].setMargin(new Insets(0, 0, 0, 0));// <----------------------
 					botoes[line][column].setFont(new Font("Tahoma", Font.BOLD, 9));
 				}
-				panel.add(botoes[line][column]);// os botões tão se comportando como se fossem o mesmo botão?			
-					botoes[line][column].actionListenerBotao(this);
-					botoes[line][column].mouseListener(this);			
+				panel.add(botoes[line][column]);// os botões tão se comportando como se fossem o mesmo botão?
+				botoes[line][column].mouseListener(this);
+				botoes[line][column].actionListenerBotao(this);
+
 			}
 		}
 	}
