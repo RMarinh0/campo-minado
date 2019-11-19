@@ -60,8 +60,7 @@ public class TelaJogo extends JFrame {
 				}
 				panel.add(botoes[line][column]);// os botões tão se comportando como se fossem o mesmo botão?			
 					botoes[line][column].actionListenerBotao(this);
-					
-					
+					botoes[line][column].mouseListener(this);			
 			}
 		}
 	}
