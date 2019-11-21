@@ -8,8 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import br.com.poli.projetocampominado.Jogador;
-
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -29,10 +27,10 @@ import javax.swing.DefaultComboBoxModel;
 public class Menu extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField textField = new JTextField(10);
 	private Dificuldade dificuldade = Dificuldade.FACIL;
 	private TelaJogo tela;
-	private Jogador jogador;
+	
 
 
 	public static void main(String[] args) {
@@ -54,7 +52,7 @@ public class Menu extends JFrame {
 		setFont(new Font("Tahoma", Font.PLAIN, 18));
 		setBackground(new Color(0, 0, 102));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 760, 700);
+		setBounds(100, 100, 700, 630);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 51, 102));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -80,6 +78,8 @@ public class Menu extends JFrame {
 		nome.setBounds(289, 231, 146, 26);
 		contentPane.add(nome);
 		nome.setColumns(10);
+		
+		
 
 		JLabel lblDificuldade = new JLabel("DIFICULDADE");
 		lblDificuldade.setForeground(Color.YELLOW);
@@ -99,7 +99,6 @@ public class Menu extends JFrame {
 		comboBoxDificuldade.setToolTipText("");
 		comboBoxDificuldade.setBounds(298, 351, 120, 26);
 		contentPane.add(comboBoxDificuldade);
-		
 		JButton btnJogar = new JButton("JOGAR");
 		btnJogar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -110,11 +109,11 @@ public class Menu extends JFrame {
 						tela = new TelaJogo(Dificuldade.MEDIO);
 					} else if (comboBoxDificuldade.getSelectedIndex() == 2) {
 						tela = new TelaJogo(Dificuldade.DIFICIL);
-                        
 					}
 				}
-				
 				tela.setVisible(true);
+				String nomeJog = nome.getText(); 
+				tela.campoMinado.getJogador().setNome(nomeJog);		
 				dispose();
 			}
 		})
@@ -134,4 +133,7 @@ public class Menu extends JFrame {
 	public void setDificuldade(Dificuldade dificuldade) {
 		this.dificuldade = dificuldade;
 	}
+
+
+	
 }

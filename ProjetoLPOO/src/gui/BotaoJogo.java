@@ -1,17 +1,26 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import jogo.Dificuldade;
+
 public class BotaoJogo extends JButton {
 	private int linha;
 	private int coluna;
+	private ImageIcon bomba = new ImageIcon(".\\images\\409bomb_100833.png");
+	private ImageIcon bandeira = new ImageIcon(".\\images\\flag-yellow256_24951.png");
+	private ImageIcon bombadificil = new ImageIcon(".\\images\\bombadificil");
+	private ImageIcon bandeiradificil = new ImageIcon(".\\images\\bandeiradificil");
 
 	// botao(linha,coluna)=celula(linha,coluna);
 	BotaoJogo(int linha, int coluna) {
@@ -24,14 +33,20 @@ public class BotaoJogo extends JButton {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (SwingUtilities.isRightMouseButton(e) == true) {
-					if (!tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).isBandeira()) {
-						tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).setBandeira(true);
-						tela.botoes[getLinha()][getColuna()].setText("^");
-						tela.botoes[getLinha()][getColuna()].setEnabled(false);
-					} else {
-						tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).setBandeira(false);
-						tela.botoes[getLinha()][getColuna()].setText("");
-						tela.botoes[getLinha()][getColuna()].setEnabled(true);
+					if (!tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).isVisivel()) {
+						if (!tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).isBandeira()) {
+							tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).setBandeira(true);
+							if (tela.campoMinado.getDificuldade() == Dificuldade.DIFICIL) {
+								tela.botoes[getLinha()][getColuna()].setIcon(bandeiradificil);
+							} else {
+								tela.botoes[getLinha()][getColuna()].setIcon(bandeira);
+							}
+							tela.botoes[getLinha()][getColuna()].setEnabled(false);
+						} else {
+							tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).setBandeira(false);
+							tela.botoes[getLinha()][getColuna()].setIcon(new ImageIcon(""));
+							tela.botoes[getLinha()][getColuna()].setEnabled(true);
+						}
 					}
 				}
 			}
@@ -50,6 +65,7 @@ public class BotaoJogo extends JButton {
 						for (int i = 0; i < tela.campoMinado.getDificuldade().getValor(); i++) {
 							for (int j = 0; j < tela.campoMinado.getDificuldade().getValor(); j++) {
 								tela.campoMinado.getMapa().getCelula(i, j).setVisivel(true);
+								tela.botoes[i][j].setForeground(Color.YELLOW);
 
 							}
 						}
@@ -80,16 +96,27 @@ public class BotaoJogo extends JButton {
 					if (!tela.campoMinado.getMapa().getCelula(i, j).isBomba()) {
 						tela.botoes[i][j].setText(
 								Integer.toString(tela.campoMinado.getMapa().getCelula(i, j).getQtdBombasVizinhas()));
+						tela.botoes[i][j].setBackground(Color.BLACK);
+						tela.botoes[i][j].setIcon(new ImageIcon(""));
+
 					} else {
-						tela.botoes[i][j].setText("B");
+
+						if (tela.campoMinado.getDificuldade() == Dificuldade.DIFICIL) {
+							tela.botoes[getLinha()][getColuna()].setIcon(bombadificil);
+						} else {
+							tela.botoes[getLinha()][getColuna()].setIcon(bomba);
+						}
+						tela.botoes[i][j].setBackground(new Color(158, 0, 0));
 					}
 					tela.botoes[i][j].setEnabled(false);
+					tela.botoes[i][j].setForeground(Color.YELLOW);
 				}
+
 			}
 		}
 		tela.campoMinado.getMapa().verificarGanhouJogo();
 		if (tela.campoMinado.getMapa().isGanhouJogo()) {
-			JOptionPane.showMessageDialog(null, "Boa corno!");
+			JOptionPane.showMessageDialog(null, "Parabéns! Você venceu!");
 			tela.dispose();
 			Menu menu = new Menu();
 			menu.setVisible(true);

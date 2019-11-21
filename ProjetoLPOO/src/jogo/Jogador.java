@@ -1,12 +1,8 @@
-package br.com.poli.projetocampominado;
+package jogo;
 
 public class Jogador {
 	// classe contendo apenas o nome do jogador como atributo e seu método getter
 	private String nome;
-
-	public Jogador(String nome) {
-		this.nome = nome;
-	}
 
 	public String getNome() {
 		return nome;
@@ -15,5 +11,6 @@ public class Jogador {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
 
 }
