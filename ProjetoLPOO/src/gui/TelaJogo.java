@@ -24,7 +24,7 @@ public class TelaJogo extends JFrame {
 		this.campoMinado = new CampoMinado(dificuldade);
 		this.dificuldade = dificuldade;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 50, 800, 1000);
+		setBounds(100, 50, 800, 760);
 		setTitle("Campo Minado || Arthur Falcão e Rafael Marinho)");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -32,7 +32,7 @@ public class TelaJogo extends JFrame {
 		setContentPane(contentPane);
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(
-		new GridLayout(9, 9));
+		new GridLayout(campoMinado.getDificuldade().getValor(), campoMinado.getDificuldade().getValor()));
 		criarBotoes();
 		//keyListener();
 	}
@@ -44,7 +44,7 @@ public class TelaJogo extends JFrame {
 	
 	
 	public void criarBotoes() {
-		botoes = new BotaoJogo[9][9];
+		botoes = new BotaoJogo[campoMinado.getDificuldade().getValor()][campoMinado.getDificuldade().getValor()];
 		
 		for (line = 0; line < campoMinado.getDificuldade().getValor(); line++) {
 			for (column = 0; column < campoMinado.getDificuldade().getValor(); column++) {
