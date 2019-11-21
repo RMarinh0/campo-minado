@@ -102,14 +102,13 @@ public class BotaoJogo extends JButton {
 					} else {
 
 						if (tela.campoMinado.getDificuldade() == Dificuldade.DIFICIL) {
-							tela.botoes[getLinha()][getColuna()].setIcon(bombadificil);
+							tela.botoes[i][j].setIcon(bombadificil);
 						} else {
-							tela.botoes[getLinha()][getColuna()].setIcon(bomba);
+							tela.botoes[i][j].setIcon(bomba);
 						}
 						tela.botoes[i][j].setBackground(new Color(158, 0, 0));
 					}
 					tela.botoes[i][j].setEnabled(false);
-					tela.botoes[i][j].setForeground(Color.YELLOW);
 				}
 
 			}
