@@ -3,6 +3,8 @@ package mapa;
 import java.util.ArrayList;
 import java.util.List;
 
+import gui.TelaJogo;
+
 public class Celula {// criação das células, que servirão como tipo dos elementos do array
 						// bidimensional "campo"
 	private boolean bandeira;// se a célula é uma bandeira ou não
@@ -44,6 +46,7 @@ public class Celula {// criação das células, que servirão como tipo dos elemento
 		else
 			return false;
 	}
+	
 
 	public boolean isBandeira() {
 		return bandeira;

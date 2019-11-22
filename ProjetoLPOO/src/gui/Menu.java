@@ -93,6 +93,7 @@ public class Menu extends JFrame {
 		btnRanking.setBounds(303, 531, 115, 29);
 		contentPane.add(btnRanking);
 
+		
 		JComboBox comboBoxDificuldade = new JComboBox();
 		comboBoxDificuldade.setFont(new Font("LCDMono2", Font.BOLD, 16));
 		comboBoxDificuldade.setModel(new DefaultComboBoxModel(new String[] { "Facil", "Medio", "Dificil" }));
@@ -124,8 +125,10 @@ public class Menu extends JFrame {
 		btnJogar.setBounds(303, 452, 115, 29);
 		contentPane.add(btnJogar);
 		dispose();
+		
 	}
-
+	
+	
 	public Dificuldade getDificuldade() {
 		return dificuldade;
 	}

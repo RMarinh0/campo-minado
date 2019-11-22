@@ -72,7 +72,8 @@ public class BotaoJogo extends JButton {
 
 						printarBotoesCelula(tela);
 
-						JOptionPane.showMessageDialog(null, "Fim de Jogo! Você perdeu!");
+						JOptionPane.showMessageDialog(null, "Fim de Jogo, " 
+						+ tela.campoMinado.getJogador().getNome()+"! Você perdeu!");
 						tela.dispose();
 						Menu menu = new Menu();
 						menu.setVisible(true);
@@ -115,7 +116,8 @@ public class BotaoJogo extends JButton {
 		}
 		tela.campoMinado.getMapa().verificarGanhouJogo();
 		if (tela.campoMinado.getMapa().isGanhouJogo()) {
-			JOptionPane.showMessageDialog(null, "Parabéns! Você venceu!");
+			JOptionPane.showMessageDialog(null, "Parabéns " + tela.campoMinado.getJogador().getNome() 
+					+"! Você venceu!");
 			tela.dispose();
 			Menu menu = new Menu();
 			menu.setVisible(true);
