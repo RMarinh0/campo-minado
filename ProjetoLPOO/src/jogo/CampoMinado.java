@@ -2,7 +2,6 @@ package jogo;
 
 import java.util.Scanner;
 
-import br.com.poli.projetocampominado.Jogador;
 import mapa.Mapa;
 import mapa.MapaDificil;
 import mapa.MapaFacil;
@@ -13,9 +12,9 @@ public class CampoMinado {
 	private Dificuldade dificuldade;
 	private Mapa mapa;
 
-	public CampoMinado(String nome, Dificuldade dificuldade) {
+	public CampoMinado(Dificuldade dificuldade) {
 		// construtor usado na main para a criação de um campo minado
-		this.jogador = new Jogador(nome);
+		this.jogador = new Jogador();
 		this.dificuldade = dificuldade;
 		// o paramêtro dificuldade será aproveitado para a formação do mapa
 		switch (dificuldade) {
@@ -29,7 +28,7 @@ public class CampoMinado {
 			this.mapa = new MapaDificil();
 			break;
 		}
-		System.out.println("Bem vindo, "+nome+"!");
+		System.out.println("Bem vindo!");
 		mapa.imprimeTela(false);
 		//iniciarJogo();
 
