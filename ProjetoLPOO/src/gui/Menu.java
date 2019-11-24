@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JScrollBar;
@@ -52,22 +53,23 @@ public class Menu extends JFrame {
 		setFont(new Font("Tahoma", Font.PLAIN, 18));
 		setBackground(new Color(0, 0, 102));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 700, 630);
+		setBounds(300, 20, 778, 670);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 51, 102));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setResizable(false);
 
 		JLabel lblCampoMinado = new JLabel("CAMPO MINADO");
-		lblCampoMinado.setForeground(Color.YELLOW);
-		lblCampoMinado.setBackground(Color.YELLOW);
+		lblCampoMinado.setForeground(new Color(232,218,0));
+		lblCampoMinado.setBackground(new Color(232,218,0));
 		lblCampoMinado.setFont(new Font("LCDMono2", Font.PLAIN, 53));
 		lblCampoMinado.setBounds(210, 59, 335, 92);
 		contentPane.add(lblCampoMinado);
 
 		JLabel lblJogador = new JLabel("JOGADOR");
-		lblJogador.setForeground(Color.YELLOW);
+		lblJogador.setForeground(new Color(232,218,0));
 		lblJogador.setFont(new Font("LCDMono2", Font.BOLD, 18));
 		lblJogador.setBounds(326, 178, 70, 37);
 		contentPane.add(lblJogador);
@@ -82,7 +84,7 @@ public class Menu extends JFrame {
 		
 
 		JLabel lblDificuldade = new JLabel("DIFICULDADE");
-		lblDificuldade.setForeground(Color.YELLOW);
+		lblDificuldade.setForeground(new Color(232,218,0));
 		lblDificuldade.setFont(new Font("LCDMono2", Font.BOLD, 18));
 		lblDificuldade.setBounds(308, 309, 110, 26);
 		contentPane.add(lblDificuldade);
@@ -93,7 +95,6 @@ public class Menu extends JFrame {
 		btnRanking.setBounds(303, 531, 115, 29);
 		contentPane.add(btnRanking);
 
-		
 		JComboBox comboBoxDificuldade = new JComboBox();
 		comboBoxDificuldade.setFont(new Font("LCDMono2", Font.BOLD, 16));
 		comboBoxDificuldade.setModel(new DefaultComboBoxModel(new String[] { "Facil", "Medio", "Dificil" }));
@@ -103,6 +104,7 @@ public class Menu extends JFrame {
 		JButton btnJogar = new JButton("JOGAR");
 		btnJogar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 				if (comboBoxDificuldade.getSelectedIndex() != -1) {
 					if (comboBoxDificuldade.getSelectedIndex() == 0) {
 						tela = new TelaJogo(Dificuldade.FACIL);
@@ -112,23 +114,30 @@ public class Menu extends JFrame {
 						tela = new TelaJogo(Dificuldade.DIFICIL);
 					}
 				}
-				tela.setVisible(true);
+			//	String nomeJog = nome.getText(); 
+				//tela.campoMinado.getJogador().setNome(nomeJog);	
+			//	int contador=0;
 				String nomeJog = nome.getText(); 
-				tela.campoMinado.getJogador().setNome(nomeJog);		
+				tela.campoMinado.getJogador().setNome(nomeJog);
+				if(!nomeJog.isEmpty())
+				tela.setVisible(true);
+				else {
+					JOptionPane.showMessageDialog(null,"Por favor, digite seu nome");
+					Menu menu = new Menu();
+					menu.setVisible(true);
+				}
 				dispose();
 			}
-		})
+		});
 
-		;
+		
 		btnJogar.setForeground(Color.BLACK);
 		btnJogar.setFont(new Font("LCDMono2", Font.BOLD, 18));
 		btnJogar.setBounds(303, 452, 115, 29);
 		contentPane.add(btnJogar);
 		dispose();
-		
 	}
-	
-	
+
 	public Dificuldade getDificuldade() {
 		return dificuldade;
 	}

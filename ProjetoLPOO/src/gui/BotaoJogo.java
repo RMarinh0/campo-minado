@@ -11,7 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-
+import jogo.Ranking;
 import jogo.Dificuldade;
 
 public class BotaoJogo extends JButton {
@@ -21,6 +21,7 @@ public class BotaoJogo extends JButton {
 	private ImageIcon bandeira = new ImageIcon(".\\images\\flag-yellow256_24951.png");
 	private ImageIcon bombadificil = new ImageIcon(".\\images\\bombadificil");
 	private ImageIcon bandeiradificil = new ImageIcon(".\\images\\bandeiradificil");
+	//private Ranking ranking;
 
 	// botao(linha,coluna)=celula(linha,coluna);
 	BotaoJogo(int linha, int coluna) {
@@ -71,9 +72,9 @@ public class BotaoJogo extends JButton {
 						}
 
 						printarBotoesCelula(tela);
-
-						JOptionPane.showMessageDialog(null, "Fim de Jogo, " 
-						+ tela.campoMinado.getJogador().getNome()+"! Você perdeu!");
+						tela.tm.cancel();
+						JOptionPane.showMessageDialog(null, "Fim de Jogo, "
+						+tela.campoMinado.getJogador().getNome()+"! Você perdeu!");
 						tela.dispose();
 						Menu menu = new Menu();
 						menu.setVisible(true);
@@ -116,8 +117,13 @@ public class BotaoJogo extends JButton {
 		}
 		tela.campoMinado.getMapa().verificarGanhouJogo();
 		if (tela.campoMinado.getMapa().isGanhouJogo()) {
-			JOptionPane.showMessageDialog(null, "Parabéns " + tela.campoMinado.getJogador().getNome() 
-					+"! Você venceu!");
+			tela.tm.cancel();
+			if(tela.campoMinado.getJogador().getNome()!=null)
+				Ranking.escreverRanking(tela.campoMinado.getJogador().getNome(),
+						tela.campoMinado.getJogador().getTempo(),tela.campoMinado.getDificuldade());
+				Ranking.lerRanking(tela.campoMinado.getDificuldade());
+			JOptionPane.showMessageDialog(null, "Parabéns "+tela.campoMinado.getJogador().getNome()+
+					"! Você venceu!");
 			tela.dispose();
 			Menu menu = new Menu();
 			menu.setVisible(true);

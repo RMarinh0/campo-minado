@@ -1,48 +1,74 @@
 package jogo;
 
-import java.io.FileWriter;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
-
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Ranking {
-	public static String Read(String caminho) { // passar o endereço da pasta
-		String conteudo = "";
+
+	private static BufferedReader lerBuffer;
+	private static File arquivo;
+	private static FileReader ler;
+
+	public static void escreverRanking(String nome, int tempo, Dificuldade dificuldade) {
+
+		// File arquivo = new File("RANKING.txt");
+		switch (dificuldade) {
+		case FACIL:
+			arquivo = new File("RankingFácil.txt");
+			break;
+		case MEDIO:
+			arquivo = new File("RankingMédio.txt");
+			break;
+		case DIFICIL:
+			arquivo = new File("RankingDifícil.txt");
+			break;
+		}
 		try {
-			FileReader arq = new FileReader(caminho);
-			BufferedReader lerArq = new BufferedReader(arq);
-			String linha = "";
-			try {
-				linha = lerArq.readLine();
-				while(linha!=null) {
-					conteudo += linha;
-					linha = lerArq.readLine();
-				}
-				arq.close();
-			} catch (IOException ex) {
-				conteudo = "Erro: Não foi possível ler o arquivo";
+			if (!arquivo.exists()) {
+				arquivo.createNewFile();
 			}
-		} catch(FileNotFoundException ex) {
-			conteudo = "Erro: Arquivo não encontrado";
-		}
-		if(conteudo.contains("Erro"))
-			return "";
-		else 
-			return conteudo;
-	}
-	 public static boolean Write(String caminho, String texto) {
-		try {
-			FileWriter arq = new FileWriter(caminho);
-			PrintWriter gravarArq = new PrintWriter(arq);
-			gravarArq.println(texto);
-			gravarArq.close();
-			return true;
-		} catch(IOException ex) {
+			FileWriter fw = new FileWriter(arquivo, true);
+			BufferedWriter escrever = new BufferedWriter(fw);
+			escrever.write(nome + ": " + tempo);
+			escrever.newLine();
+			escrever.close();
+
+			escrever.close();
+			fw.close();
+		} catch (IOException ex) {
 			System.out.println(ex.getMessage());
-			return false;
 		}
-	 }
+	}
+
+	public static void lerRanking(Dificuldade dificuldade) {
+		try {
+			//FileReader ler = new FileReader("RANKING.txt");
+			switch(dificuldade) {
+			case FACIL:
+				ler = new FileReader("RankingFácil.txt");
+				break;
+			case MEDIO:
+				ler = new FileReader("RankingMédio.txt");
+				break;
+			case DIFICIL:
+				ler = new FileReader("RankingDifícil.txt");
+				break;
+			}
+			lerBuffer = new BufferedReader(ler);
+			String linha = lerBuffer.readLine();
+			while (linha != null) {
+				System.out.println(linha);
+				linha = lerBuffer.readLine();
+			}
+		} catch (IOException ex) {
+
+		}
+
+	}
+
 }

@@ -12,7 +12,7 @@ public class CampoMinado {
 	private Jogador jogador;
 	private Dificuldade dificuldade;
 	private Mapa mapa;
-
+    Ranking ranking;
 	public CampoMinado(Dificuldade dificuldade) {
 		// construtor usado na main para a criação de um campo minado
 		this.jogador = new Jogador();
@@ -30,29 +30,16 @@ public class CampoMinado {
 			break;
 		}
 		System.out.println("Bem vindo!");
-		mapa.imprimeTela(false);
+		mapa.imprimeTela(true);
+		/*
 		if(jogador.getNome()!=null) {
-			 sucesso();
+		ranking.escreverRanking(jogador.getNome(), jogador.getTempo());
+		ranking.lerRanking();
 		}
-		else
-			System.out.println("FODEU");
+		*/
 		//iniciarJogo();
 
 	}
-	
-	
-	public void sucesso() {
-		String arq = "rank.txt";
-		String texto = jogador.getNome();
-		if(Ranking.Write(arq, texto)) {
-			System.out.println("sucesso"); 
-		System.out.println(texto);
-		}
-		else
-			System.out.println("fodeu");
-	}
-		
-	
 
 	public void iniciarJogo() {//método pilar do jogo que continuará pedindo coordenadas de células enquanto não achar uma bomba ou atingir
 		                       //a condição de vitória
@@ -68,7 +55,6 @@ public class CampoMinado {
 				mapa.verificarGanhouJogo();
 			} else
 				iniciarJogo();
-
 		} while (mapa.isFimDeJogo() == false && mapa.isGanhouJogo() == false);
 	}
 
