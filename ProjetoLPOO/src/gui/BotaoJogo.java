@@ -97,10 +97,8 @@ public class BotaoJogo extends JButton {
 		});
 	}
 
-//BORA PORRA
+
 	public void primeiraPosicao(TelaJogo tela) {
-		// TÁ FUNCIONANDO CARAI
-		// Menos se a posiçao for uma bomba
 		if (!tela.campoMinado.getMapa().getCelula(linha, coluna).isEmBranco()
 				|| tela.campoMinado.getMapa().getCelula(linha, coluna).isBomba()) {
 			Dificuldade novaDificuldade = tela.campoMinado.getDificuldade();
@@ -109,7 +107,6 @@ public class BotaoJogo extends JButton {
 			TelaJogo tela2 = new TelaJogo(novaDificuldade);
 			tela2.campoMinado.getJogador().setNome(novoJogador);
 			tela2.setVisible(true);
-			// if(!tela2.campoMinado.getMapa().getCelula(linha, coluna).isBomba())
 			tela2.campoMinado.getMapa().escolherPosicao(linha, coluna);
 			printarBotoesCelula(tela2);
 			primeiraPosicao(tela2);
