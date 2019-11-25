@@ -36,9 +36,7 @@ public class Ranking {
 			BufferedWriter escrever = new BufferedWriter(fw);
 			escrever.write(nome + ": " + tempo);
 			escrever.newLine();
-			escrever.close();
-
-			escrever.close();
+			escrever.close(); 	
 			fw.close();
 		} catch (IOException ex) {
 			System.out.println(ex.getMessage());

@@ -50,6 +50,7 @@ public class Menu extends JFrame {
 
 	public Menu() {
 		setTitle("Campo Minado - Arthur Falc\u00E3o & Rafael Marinho");
+	
 		setFont(new Font("Tahoma", Font.PLAIN, 18));
 		setBackground(new Color(0, 0, 102));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

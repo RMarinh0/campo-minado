@@ -14,7 +14,6 @@ public abstract class Mapa {
 	private int celulasVisiveis;// cada vez que uma célula tornar-se visível, com exceção da bomba, essa
 								// variável será incrementada para garantir
 								// a condição de vitória
-
 	public Mapa(int bombas, int tamanho) {
 		// a seguir, a inicialização do array campo, utilizando os valores(tamanho) da
 		// respectiva
@@ -88,8 +87,18 @@ public abstract class Mapa {
 		}
 	}
 
+
 	public void escolherPosicao(int linha, int coluna) {// método que permite ao jogador escolher o elemento da matriz
-														// em que deseja jogar
+		/*												// em que deseja jogar
+		do {// garantir primeira posição branca
+			if (!getCelula(linha, coluna).isEmBranco()) {
+				Menu menu = new Menu();
+				menu.setVisible(true);
+				TelaJogo tela = new TelaJogo(this.getDificuldade());
+				tela.setVisible(true);
+				escolherPosicao(linha, coluna);
+			}
+		} while (contador < 1);*/
 		if (getCelula(linha, coluna).isBomba() == true) {
 			getCelula(linha, coluna).setVisivel(true);// se a posição escolhida for uma bomba, o jogo é "encerrado"
 			System.out.println("Fim de Jogo! Você perdeu!");

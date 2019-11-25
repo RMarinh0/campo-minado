@@ -62,6 +62,14 @@ public class TelaJogo extends JFrame {
 
 	}
  
+	boolean jaExecutado = false;
+
+	public boolean isExecutado() {
+		return this.jaExecutado;
+	}
+	void setExecutado(boolean pffunfa) {
+		this.jaExecutado = pffunfa;
+	}
 	
 	public int line;
 	public int column;
