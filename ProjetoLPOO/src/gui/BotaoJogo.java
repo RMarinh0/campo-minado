@@ -1,20 +1,24 @@
 package gui;
 
 import java.awt.Color;
+//import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.text.BreakIterator;
+//import java.awt.event.MouseListener;
+//import java.text.BreakIterator;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+//import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+//import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import jogo.Ranking;
 import jogo.Dificuldade;
-import jogo.Jogador;
+//import jogo.Jogador;
 
 public class BotaoJogo extends JButton {
 	private int linha;
@@ -23,9 +27,7 @@ public class BotaoJogo extends JButton {
 	private ImageIcon bandeira = new ImageIcon(".\\images\\flag-yellow256_24951.png");
 	private ImageIcon bombadificil = new ImageIcon(".\\images\\bombadificil");
 	private ImageIcon bandeiradificil = new ImageIcon(".\\images\\bandeiradificil");
-	// private Ranking ranking;
-
-	// botao(linha,coluna)=celula(linha,coluna);
+	
 	BotaoJogo(int linha, int coluna) {
 		this.linha = linha;
 		this.coluna = coluna;
@@ -38,17 +40,23 @@ public class BotaoJogo extends JButton {
 				if (SwingUtilities.isRightMouseButton(e) == true) {
 					if (!tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).isVisivel()) {
 						if (!tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).isBandeira()) {
-							tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).setBandeira(true);
-							if (tela.campoMinado.getDificuldade() == Dificuldade.DIFICIL) {
-								tela.botoes[getLinha()][getColuna()].setIcon(bandeiradificil);
-							} else {
-								tela.botoes[getLinha()][getColuna()].setIcon(bandeira);
+							if (tela.campoMinado.getMapa().getNumBandeiras() < tela.campoMinado.getMapa().getBombas()) {
+								tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).setBandeira(true);
+								tela.campoMinado.getMapa()
+										.setNumBandeiras(tela.campoMinado.getMapa().getNumBandeiras() + 1);
+								if (tela.campoMinado.getDificuldade() == Dificuldade.DIFICIL) {
+									tela.botoes[getLinha()][getColuna()].setIcon(bandeiradificil);
+								} else {
+									tela.botoes[getLinha()][getColuna()].setIcon(bandeira);
+								}
+								tela.botoes[getLinha()][getColuna()].setEnabled(false);
 							}
-							tela.botoes[getLinha()][getColuna()].setEnabled(false);
 						} else {
 							tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).setBandeira(false);
 							tela.botoes[getLinha()][getColuna()].setIcon(new ImageIcon(""));
 							tela.botoes[getLinha()][getColuna()].setEnabled(true);
+							tela.campoMinado.getMapa()
+									.setNumBandeiras(tela.campoMinado.getMapa().getNumBandeiras() - 1);
 						}
 					}
 				}
@@ -97,7 +105,6 @@ public class BotaoJogo extends JButton {
 		});
 	}
 
-
 	public void primeiraPosicao(TelaJogo tela) {
 		if (!tela.campoMinado.getMapa().getCelula(linha, coluna).isEmBranco()
 				|| tela.campoMinado.getMapa().getCelula(linha, coluna).isBomba()) {
@@ -113,9 +120,10 @@ public class BotaoJogo extends JButton {
 			tela.setExecutado(true);
 		} else
 			tela.setExecutado(true);
-		    tela.campoMinado.getMapa().escolherPosicao(linha, coluna);
-		    printarBotoesCelula(tela);
+		tela.campoMinado.getMapa().escolherPosicao(linha, coluna);
+		printarBotoesCelula(tela);
 	}
+	  
 
 	public void printarBotoesCelula(TelaJogo tela) {
 		for (int i = 0; i < tela.campoMinado.getDificuldade().getValor(); i++) {
@@ -142,16 +150,23 @@ public class BotaoJogo extends JButton {
 					}
 					tela.botoes[i][j].setEnabled(false);
 				}
-
 			}
+			//this.getIconeBandeiras().setText(Integer.toString(tela.campoMinado.getMapa().getNumBandeiras()));
+			
 		}
 		tela.campoMinado.getMapa().verificarGanhouJogo();
 		if (tela.campoMinado.getMapa().isGanhouJogo()) {
 			tela.tm.cancel();
-			if (tela.campoMinado.getJogador().getNome() != null)
+			//if (tela.campoMinado.getJogador().getNome()!= null)
 				Ranking.escreverRanking(tela.campoMinado.getJogador().getNome(),
-						tela.campoMinado.getJogador().getTempo(), tela.campoMinado.getDificuldade());
-			Ranking.lerRanking(tela.campoMinado.getDificuldade());
+						tela.campoMinado.getJogador().getTempo(),
+						tela.campoMinado.getDificuldade());
+			try {
+				Ranking.lerRanking(tela.campoMinado.getDificuldade());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			JOptionPane.showMessageDialog(null,
 					"Parabéns " + tela.campoMinado.getJogador().getNome() + "! Você venceu!");
 			tela.dispose();
@@ -175,4 +190,6 @@ public class BotaoJogo extends JButton {
 	public void setColuna(int coluna) {
 		this.coluna = coluna;
 	}
+
+	
 }

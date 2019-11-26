@@ -31,13 +31,9 @@ public class CampoMinado {
 		}
 		System.out.println("Bem vindo!");
 		mapa.imprimeTela(true);
-		/*
-		if(jogador.getNome()!=null) {
-		ranking.escreverRanking(jogador.getNome(), jogador.getTempo());
-		ranking.lerRanking();
-		}
-		*/
-		//iniciarJogo();
+		System.out.println("----------------------------");
+		
+		
 
 	}
 

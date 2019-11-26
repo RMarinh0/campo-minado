@@ -12,8 +12,9 @@ public abstract class Mapa {
 	private boolean fimDeJogo;
 	private boolean ganhouJogo;
 	private int celulasVisiveis;// cada vez que uma célula tornar-se visível, com exceção da bomba, essa
-								// variável será incrementada para garantir
+	private int numBandeiras;	// variável será incrementada para garantir
 								// a condição de vitória
+
 	public Mapa(int bombas, int tamanho) {
 		// a seguir, a inicialização do array campo, utilizando os valores(tamanho) da
 		// respectiva
@@ -29,6 +30,16 @@ public abstract class Mapa {
 		percorrerVizinhos(campo);// assim que for criado o mapa, esse método dará a cada célula uma lista com
 									// seus respectivos vizinhos
 
+	}
+
+	
+
+	public int getNumBandeiras() {
+		return numBandeiras;
+	}
+
+	public void setNumBandeiras(int numBandeiras) {
+		this.numBandeiras = numBandeiras;
 	}
 
 	public void imprimeTela(boolean teste) {
@@ -87,18 +98,7 @@ public abstract class Mapa {
 		}
 	}
 
-
 	public void escolherPosicao(int linha, int coluna) {// método que permite ao jogador escolher o elemento da matriz
-		/*												// em que deseja jogar
-		do {// garantir primeira posição branca
-			if (!getCelula(linha, coluna).isEmBranco()) {
-				Menu menu = new Menu();
-				menu.setVisible(true);
-				TelaJogo tela = new TelaJogo(this.getDificuldade());
-				tela.setVisible(true);
-				escolherPosicao(linha, coluna);
-			}
-		} while (contador < 1);*/
 		if (getCelula(linha, coluna).isBomba() == true) {
 			getCelula(linha, coluna).setVisivel(true);// se a posição escolhida for uma bomba, o jogo é "encerrado"
 			System.out.println("Fim de Jogo! Você perdeu!");
@@ -113,8 +113,9 @@ public abstract class Mapa {
 														// usando recursividade para revelar todos os vazios em volta,
 		} // e parar quando achar uma não vazia que não seja uma bomba
 
-		imprimeTela(false);// ao final do método, a tela será impressa novamente com os valores
+		imprimeTela(true);// ao final do método, a tela será impressa novamente com os valores
 							// atualizados, deixando os inalterados invisíveis
+		System.out.println("----------------------------");
 		verificarGanhouJogo();
 	}
 

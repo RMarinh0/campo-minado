@@ -1,8 +1,9 @@
 package gui;
 
 import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
-import mapa.*;
+//import mapa.*;
 import jogo.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,16 +13,16 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
-import javax.swing.JList;
+//import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.JScrollBar;
+//import javax.swing.JScrollPane;
+//import javax.swing.JScrollBar;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.ListSelectionModel;
-import javax.swing.JRadioButton;
+//import javax.swing.ScrollPaneConstants;
+//import javax.swing.ListSelectionModel;
+//import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
@@ -32,8 +33,6 @@ public class Menu extends JFrame {
 	private Dificuldade dificuldade = Dificuldade.FACIL;
 	private TelaJogo tela;
 	
-
-
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
