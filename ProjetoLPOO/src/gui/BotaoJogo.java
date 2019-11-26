@@ -27,7 +27,7 @@ public class BotaoJogo extends JButton {
 	private ImageIcon bandeira = new ImageIcon(".\\images\\flag-yellow256_24951.png");
 	private ImageIcon bombadificil = new ImageIcon(".\\images\\bombadificil");
 	private ImageIcon bandeiradificil = new ImageIcon(".\\images\\bandeiradificil");
-	
+
 	BotaoJogo(int linha, int coluna) {
 		this.linha = linha;
 		this.coluna = coluna;
@@ -40,8 +40,8 @@ public class BotaoJogo extends JButton {
 				if (SwingUtilities.isRightMouseButton(e) == true) {
 					if (!tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).isVisivel()) {
 						if (!tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).isBandeira()) {
-							if (tela.campoMinado.getMapa().getNumBandeiras() < tela.campoMinado.getMapa().getBombas()) {
-								tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).setBandeira(true);
+							if (tela.campoMinado.getMapa().getNumBandeiras() < tela.campoMinado.getMapa().getBombas()) {//limitar o nº de bandeiras
+								tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).setBandeira(true); //de acordo com o nº de bombas
 								tela.campoMinado.getMapa()
 										.setNumBandeiras(tela.campoMinado.getMapa().getNumBandeiras() + 1);
 								if (tela.campoMinado.getDificuldade() == Dificuldade.DIFICIL) {
@@ -70,10 +70,8 @@ public class BotaoJogo extends JButton {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				// Chamo aqui!
-				if (!tela.isExecutado()) {
+				if (!tela.isExecutado()) { // garantir que o método só seja chamado na primeira jogada da partida
 					primeiraPosicao(tela);
-					tela.setExecutado(true);
 				} else {
 					if (!tela.campoMinado.getMapa().getCelula(linha, coluna).isVisivel()) {
 						if (tela.campoMinado.getMapa().getCelula(linha, coluna).isBomba()) {
@@ -105,25 +103,39 @@ public class BotaoJogo extends JButton {
 		});
 	}
 
-	public void primeiraPosicao(TelaJogo tela) {
+	public void primeiraPosicao(TelaJogo tela) {// garantir que a primeira posição sempre será vazia
 		if (!tela.campoMinado.getMapa().getCelula(linha, coluna).isEmBranco()
 				|| tela.campoMinado.getMapa().getCelula(linha, coluna).isBomba()) {
 			Dificuldade novaDificuldade = tela.campoMinado.getDificuldade();
 			String novoJogador = tela.campoMinado.getJogador().getNome();
 			tela.dispose();
-			TelaJogo tela2 = new TelaJogo(novaDificuldade);
+			TelaJogo tela2 = new TelaJogo(novaDificuldade);// passando os dados do jogador "antigo" para o "novo"
 			tela2.campoMinado.getJogador().setNome(novoJogador);
-			tela2.setVisible(true);
-			tela2.campoMinado.getMapa().escolherPosicao(linha, coluna);
-			printarBotoesCelula(tela2);
-			primeiraPosicao(tela2);
-			tela.setExecutado(true);
+			tela2.campoMinado.getMapa().escolherPosicao(linha, coluna);// escolher a mesma posição clicada p/ que não se
+																		// tenha que jogar 2 vezes
+			/*
+			 * tela2.setVisible(true); tela2.campoMinado.getMapa().escolherPosicao(linha,
+			 * coluna); printarBotoesCelula(tela2); primeiraPosicao(tela2);
+			 * tela.setExecutado(true);
+			 */
+			if (tela2.campoMinado.getMapa().getCelula(linha, coluna).isEmBranco() // caso a posição seja vazia no novo
+																					// tabuleiro, continuar o jogo
+					&& !tela2.campoMinado.getMapa().getCelula(linha, coluna).isBomba()) {
+				tela.dispose();
+				tela2.setVisible(true);
+				printarBotoesCelula(tela2);
+			} else { // caso não, chamar o mesmo método em cima da mesma posição, mas com o novo
+						// objeto de tela como referência
+				tela.dispose();
+				primeiraPosicao(tela2);
+			}
+			tela2.setExecutado(true); // boolean de controle para que o método só funcione uma vez(e não seja chamado
+										// a partir da segunda jogada
 		} else
-			tela.setExecutado(true);
+			tela.setExecutado(true); // caso a posição já seja vazia, continuar o jogo normalmente
 		tela.campoMinado.getMapa().escolherPosicao(linha, coluna);
 		printarBotoesCelula(tela);
 	}
-	  
 
 	public void printarBotoesCelula(TelaJogo tela) {
 		for (int i = 0; i < tela.campoMinado.getDificuldade().getValor(); i++) {
@@ -151,16 +163,15 @@ public class BotaoJogo extends JButton {
 					tela.botoes[i][j].setEnabled(false);
 				}
 			}
-			//this.getIconeBandeiras().setText(Integer.toString(tela.campoMinado.getMapa().getNumBandeiras()));
-			
+			// this.getIconeBandeiras().setText(Integer.toString(tela.campoMinado.getMapa().getNumBandeiras()));
+
 		}
 		tela.campoMinado.getMapa().verificarGanhouJogo();
 		if (tela.campoMinado.getMapa().isGanhouJogo()) {
 			tela.tm.cancel();
-			//if (tela.campoMinado.getJogador().getNome()!= null)
-				Ranking.escreverRanking(tela.campoMinado.getJogador().getNome(),
-						tela.campoMinado.getJogador().getTempo(),
-						tela.campoMinado.getDificuldade());
+			// if (tela.campoMinado.getJogador().getNome()!= null)
+			Ranking.escreverRanking(tela.campoMinado.getJogador().getNome(), tela.campoMinado.getJogador().getTempo(),
+					tela.campoMinado.getDificuldade());
 			try {
 				Ranking.lerRanking(tela.campoMinado.getDificuldade());
 			} catch (IOException e) {
@@ -191,5 +202,4 @@ public class BotaoJogo extends JButton {
 		this.coluna = coluna;
 	}
 
-	
 }

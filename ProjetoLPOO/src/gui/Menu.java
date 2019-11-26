@@ -114,9 +114,6 @@ public class Menu extends JFrame {
 						tela = new TelaJogo(Dificuldade.DIFICIL);
 					}
 				}
-			//	String nomeJog = nome.getText(); 
-				//tela.campoMinado.getJogador().setNome(nomeJog);	
-			//	int contador=0;
 				String nomeJog = nome.getText(); 
 				tela.campoMinado.getJogador().setNome(nomeJog);
 				if(!nomeJog.isEmpty())

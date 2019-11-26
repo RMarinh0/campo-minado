@@ -6,3 +6,10 @@ dcra: 25
 vamo ve se pega essa porra: 26
 meutemponaverada: 12
 temponavera2: 31
+dasda: 62
+ddasd: 29
+ddas: 31
+sasdAD: 32
+AD: 18
+asdasd: 28
+dasdas: 20

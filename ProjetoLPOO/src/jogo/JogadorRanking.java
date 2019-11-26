@@ -11,6 +11,7 @@ public class JogadorRanking implements Comparable<JogadorRanking> {
 	public JogadorRanking(String nome, int tempo) {
 		this.nome = nome;
 		this.tempo = tempo;
+		
 	}
 
 	public void adicionaJogador(String nome, int tempo) {
@@ -20,9 +21,11 @@ public class JogadorRanking implements Comparable<JogadorRanking> {
 	@Override
 	public int compareTo(JogadorRanking jogador2) {
 		if (this.tempo > jogador2.tempo) {
+			//dadosRanking.add(new JogadorRanking(this.nome,this.tempo)); tava testando esses dois 
 			return -1;
 		}
 		if (this.tempo < jogador2.tempo) {
+			//dadosRanking.add(new JogadorRanking(jogador2.getNome(),jogador2.getTempo()));
 			return 1;
 		}
 		return 0;

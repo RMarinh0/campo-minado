@@ -113,7 +113,7 @@ public abstract class Mapa {
 														// usando recursividade para revelar todos os vazios em volta,
 		} // e parar quando achar uma não vazia que não seja uma bomba
 
-		imprimeTela(true);// ao final do método, a tela será impressa novamente com os valores
+		//imprimeTela(true);// ao final do método, a tela será impressa novamente com os valores
 							// atualizados, deixando os inalterados invisíveis
 		System.out.println("----------------------------");
 		verificarGanhouJogo();

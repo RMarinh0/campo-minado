@@ -51,14 +51,17 @@ public class TelaJogo extends JFrame {
 
 		panel.setBounds(15, 54, 732, 560);
 		panelmaior.add(panel);
-		panel.setLayout(
-				new GridLayout(campoMinado.getDificuldade().getValor(), campoMinado.getDificuldade().getValor()));
+		panel.setLayout(new GridLayout(campoMinado.getDificuldade().getValor(),
+				campoMinado.getDificuldade().getValor()));
 		criarBotoes();
 		cronometro();
 		cronometro.setForeground(new Color(232, 218, 0));
 		cronometro.setFont(new Font("LCDMono2", Font.BOLD, 30));
 		cronometro.setBounds(304, 0, 144, 48);
 		panelmaior.add(cronometro);
+		iconeBandeiras.setForeground(new Color(232, 218, 0));
+		iconeBandeiras.setFont(new Font("LCDMono2", Font.BOLD, 30));
+		iconeBandeiras.setBounds(15, 13, 100, 39);
 	}
 
 	public JLabel getIconeBandeiras() {
@@ -116,11 +119,9 @@ public class TelaJogo extends JFrame {
 				min %= 60;
 				cronometro.setText(String.format("%02d:%02d:%02d", hora, min, seg));
 				campoMinado.getJogador().setTempo(contador);
-				iconeBandeiras.setForeground(new Color(232, 218, 0));
-				iconeBandeiras.setFont(new Font("LCDMono2", Font.BOLD, 30));
-				iconeBandeiras.setBounds(15, 13, 100, 39);
-				iconeBandeiras.setText(Integer.toString(campoMinado.getMapa().getNumBandeiras()));
-				panelmaior.add(iconeBandeiras);
+				iconeBandeiras.setText(Integer.toString( //já que cronômetro()roda até o final da partida, ele também é usado para
+						campoMinado.getMapa().getNumBandeiras()));//atualizar no topo da interface o número de bandeiras colocadas
+				panelmaior.add(iconeBandeiras);                                                    
 			}
 		}, 1000, 1000);
 
