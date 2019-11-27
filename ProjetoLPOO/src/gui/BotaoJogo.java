@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import jogo.Ranking;
 import jogo.Dificuldade;
+import jogo.CampoMinado;
 //import jogo.Jogador;
 
 public class BotaoJogo extends JButton {
@@ -40,8 +41,8 @@ public class BotaoJogo extends JButton {
 				if (SwingUtilities.isRightMouseButton(e) == true) {
 					if (!tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).isVisivel()) {
 						if (!tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).isBandeira()) {
-							if (tela.campoMinado.getMapa().getNumBandeiras() < tela.campoMinado.getMapa().getBombas()) {//limitar o nº de bandeiras
-								tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).setBandeira(true); //de acordo com o nº de bombas
+							if (tela.campoMinado.getMapa().getNumBandeiras() < tela.campoMinado.getMapa().getBombas()) {
+								tela.campoMinado.getMapa().getCelula(getLinha(), getColuna()).setBandeira(true);
 								tela.campoMinado.getMapa()
 										.setNumBandeiras(tela.campoMinado.getMapa().getNumBandeiras() + 1);
 								if (tela.campoMinado.getDificuldade() == Dificuldade.DIFICIL) {
@@ -70,7 +71,8 @@ public class BotaoJogo extends JButton {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if (!tela.isExecutado()) { // garantir que o método só seja chamado na primeira jogada da partida
+				// Chamo aqui!
+				if (!tela.isExecutado()) { // garantir que o método só seja chamado na primeira jogada
 					primeiraPosicao(tela);
 				} else {
 					if (!tela.campoMinado.getMapa().getCelula(linha, coluna).isVisivel()) {
@@ -104,33 +106,18 @@ public class BotaoJogo extends JButton {
 	}
 
 	public void primeiraPosicao(TelaJogo tela) {// garantir que a primeira posição sempre será vazia
-		if (!tela.campoMinado.getMapa().getCelula(linha, coluna).isEmBranco()
+		if (!tela.campoMinado.getMapa().getCelula(linha, coluna).isEmBranco() //Caso a posição não seja em branco,
 				|| tela.campoMinado.getMapa().getCelula(linha, coluna).isBomba()) {
-			Dificuldade novaDificuldade = tela.campoMinado.getDificuldade();
-			String novoJogador = tela.campoMinado.getJogador().getNome();
-			tela.dispose();
-			TelaJogo tela2 = new TelaJogo(novaDificuldade);// passando os dados do jogador "antigo" para o "novo"
-			tela2.campoMinado.getJogador().setNome(novoJogador);
-			tela2.campoMinado.getMapa().escolherPosicao(linha, coluna);// escolher a mesma posição clicada p/ que não se
-																		// tenha que jogar 2 vezes
-			/*
-			 * tela2.setVisible(true); tela2.campoMinado.getMapa().escolherPosicao(linha,
-			 * coluna); printarBotoesCelula(tela2); primeiraPosicao(tela2);
-			 * tela.setExecutado(true);
-			 */
-			if (tela2.campoMinado.getMapa().getCelula(linha, coluna).isEmBranco() // caso a posição seja vazia no novo
-																					// tabuleiro, continuar o jogo
-					&& !tela2.campoMinado.getMapa().getCelula(linha, coluna).isBomba()) {
-				tela.dispose();
-				tela2.setVisible(true);
-				printarBotoesCelula(tela2);
-			} else { // caso não, chamar o mesmo método em cima da mesma posição, mas com o novo
-						// objeto de tela como referência
-				tela.dispose();
-				primeiraPosicao(tela2);
-			}
-			tela2.setExecutado(true); // boolean de controle para que o método só funcione uma vez(e não seja chamado
-										// a partir da segunda jogada
+			CampoMinado campo2 = new CampoMinado(tela.campoMinado.getDificuldade());//um novo campoMinado é gerado, que reseta
+			campo2.getJogador().setNome(tela.campoMinado.getJogador().getNome());   // o tabuleiro até que a 1a posição seja vazia
+			campo2.getMapa().escolherPosicao(linha, coluna);
+			if (campo2.getMapa().getCelula(linha, coluna).isEmBranco() //caso a posição do novo tabuleiro seja vazia,
+					&& !campo2.getMapa().getCelula(linha, coluna).isBomba()) {//setamos ele como o novo campoMinado a aparecer na tela
+				tela.setCampoMinado(campo2);
+				printarBotoesCelula(tela);
+			} else
+				primeiraPosicao(tela);
+			tela.setExecutado(true);
 		} else
 			tela.setExecutado(true); // caso a posição já seja vazia, continuar o jogo normalmente
 		tela.campoMinado.getMapa().escolherPosicao(linha, coluna);
@@ -172,12 +159,10 @@ public class BotaoJogo extends JButton {
 			// if (tela.campoMinado.getJogador().getNome()!= null)
 			Ranking.escreverRanking(tela.campoMinado.getJogador().getNome(), tela.campoMinado.getJogador().getTempo(),
 					tela.campoMinado.getDificuldade());
-			try {
-				Ranking.lerRanking(tela.campoMinado.getDificuldade());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			/*
+			 * try { Ranking.lerRanking(tela.campoMinado.getDificuldade()); } catch
+			 * (IOException e) { // TODO Auto-generated catch block e.printStackTrace(); }
+			 */
 			JOptionPane.showMessageDialog(null,
 					"Parabéns " + tela.campoMinado.getJogador().getNome() + "! Você venceu!");
 			tela.dispose();
