@@ -116,7 +116,7 @@ public class BotaoJogo extends JButton {
 				tela.setCampoMinado(campo2);
 				printarBotoesCelula(tela);
 			} else
-				primeiraPosicao(tela);
+				primeiraPosicao(tela);  //rodar novamente até que a 1a posição seja vazia
 			tela.setExecutado(true);
 		} else
 			tela.setExecutado(true); // caso a posição já seja vazia, continuar o jogo normalmente

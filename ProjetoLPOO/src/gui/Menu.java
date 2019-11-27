@@ -97,8 +97,7 @@ public class Menu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					System.out.println("Ranking: "+Ranking.lerRanking("RankingMedio.txt").retornaJogador());
-					//System.out.println("Nome: "+Ranking.lerRanking("RankingMedio.txt").retornaNome());
-					//System.out.println("Tempo: "+Ranking.lerRanking("RankingMedio.txt").retornaTempo());
+	
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

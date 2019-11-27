@@ -159,7 +159,7 @@ public abstract class Mapa {
 			}
 		}
 	}
-
+//.
 	public boolean verificarGanhouJogo() {
 		if (this.celulasVisiveis >= (this.campo.length * this.campo.length) - this.bombas) {// condição de vitória do
 																							// jogador

@@ -60,12 +60,12 @@ public class Ranking {
 		JogadorRanking ranking = new JogadorRanking("fausto", 70);
 		String linha;
 		while ((linha = buffR.readLine()) != null) {
-		//	String nome = linha;
+		//	String nome = linha;a
 			linha = buffR.readLine();
 			ranking.setTempo(Integer.parseInt(linha));
 		//	System.out.println("linha 64-> tempo = "+linha);
 		//	int tempo = Integer.parseInt(linha);
-			//System.out.println("vai adicionar o nome e o tempo: "+nome+tempo);
+			/////System.out.println("vai adicionar o nome e o tempo: "+nome+tempo);
 			//ranking.adicionaJogador(nome, tempo);
 			linha = buffR.readLine();
 			ranking.setNome(linha);

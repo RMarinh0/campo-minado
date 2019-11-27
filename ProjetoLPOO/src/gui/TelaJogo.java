@@ -35,7 +35,7 @@ public class TelaJogo extends JFrame {
 
 
 	public CampoMinado getCampoMinado() {
-		return campoMinado;
+		return this.campoMinado;
 	}
 
 	public void setCampoMinado(CampoMinado campoMinado) {

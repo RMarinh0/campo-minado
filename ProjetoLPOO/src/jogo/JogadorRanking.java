@@ -57,7 +57,6 @@ public class JogadorRanking implements Comparable<JogadorRanking> {
 		String texto = "";
 		for (JogadorRanking jogador : dadosRanking) {
 			texto += jogador.getNome() + "\n";
-		//	System.out.println("iterando o for(retornaNome) " + jogador.getNome());
 		}
 		return texto;
 	}
@@ -66,7 +65,6 @@ public class JogadorRanking implements Comparable<JogadorRanking> {
 		String tempo = "";
 		for (JogadorRanking jogador : dadosRanking) {
 			tempo += Integer.toString(jogador.getTempo()) + "\n";
-		//	System.out.println("iterando o for(retornaTempo) "+jogador.getTempo());
 		}
 		return tempo;
 	}
