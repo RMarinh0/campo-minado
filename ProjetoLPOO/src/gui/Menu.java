@@ -19,6 +19,7 @@ import javax.swing.JButton;
 //import javax.swing.JScrollPane;
 //import javax.swing.JScrollBar;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 //import javax.swing.ScrollPaneConstants;
 //import javax.swing.ListSelectionModel;
@@ -90,6 +91,22 @@ public class Menu extends JFrame {
 		contentPane.add(lblDificuldade);
 
 		JButton btnRanking = new JButton("RANKING");
+		btnRanking.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					System.out.println("Ranking: "+Ranking.lerRanking("RankingMedio.txt").retornaJogador());
+					//System.out.println("Nome: "+Ranking.lerRanking("RankingMedio.txt").retornaNome());
+					//System.out.println("Tempo: "+Ranking.lerRanking("RankingMedio.txt").retornaTempo());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+		
 		btnRanking.setForeground(Color.BLACK);
 		btnRanking.setFont(new Font("LCDMono2", Font.BOLD, 18));
 		btnRanking.setBounds(303, 531, 115, 29);
@@ -114,6 +131,9 @@ public class Menu extends JFrame {
 						tela = new TelaJogo(Dificuldade.DIFICIL);
 					}
 				}
+			//	String nomeJog = nome.getText(); 
+				//tela.campoMinado.getJogador().setNome(nomeJog);	
+			//	int contador=0;
 				String nomeJog = nome.getText(); 
 				tela.campoMinado.getJogador().setNome(nomeJog);
 				if(!nomeJog.isEmpty())

@@ -19,34 +19,59 @@ public class Ranking {
 	private static FileWriter fileW;
 	private static BufferedWriter buffW;
 
-	
-	public static JogadorRanking lerRanking(Dificuldade dificuldade) throws IOException {
+	public static void escreverRanking(String nome, int tempo, Dificuldade dificuldade) {
+
+		File arquivo = new File("RANKING.txt");
 		switch (dificuldade) {
 		case FACIL:
-			fileR = new FileReader("RankingFácil.txt");
+			arquivo = new File("RankingFacil.txt");
 			break;
 		case MEDIO:
-			fileR = new FileReader("RankingMédio.txt");
+			arquivo = new File("RankingMedio.txt");
 			break;
 		case DIFICIL:
-			fileR = new FileReader("RankingDifícil.txt");
+			arquivo = new File("RankingDificil.txt");
 			break;
 		}
-		buffR = new BufferedReader(fileR);
-		JogadorRanking ranking = new JogadorRanking("", 0);
-		String linha = buffR.readLine();
-		while (linha != null) {
-			String nome = linha;
-			// linha = buffR.readLine();
-			int tempo = 0;
-			while ((linha = buffR.readLine()) != null) {
-				if (!linha.equals(""))
-					linha = "0";
-				tempo = Integer.parseInt(linha);
+		try {
+			if (!arquivo.exists()) {
+				arquivo.createNewFile();
 			}
-			// int tempo = Integer.parseInt(linha);
-			ranking.adicionaJogador(nome, tempo);
+			FileWriter fw = new FileWriter(arquivo, true);
+			BufferedWriter escrever = new BufferedWriter(fw);
+			escrever.newLine();
+			escrever.write(Integer.toString(tempo));
+			escrever.newLine();
+			escrever.write(nome);
+			escrever.newLine();
+			escrever.close();
+			fw.close();
+		} catch (IOException ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
+
+
+
+	public static JogadorRanking lerRanking(String arquivo) throws IOException {
+		//System.out.println("a");
+		fileR = new FileReader(arquivo);
+		buffR = new BufferedReader(fileR);
+		JogadorRanking ranking = new JogadorRanking("fausto", 70);
+		String linha;
+		while ((linha = buffR.readLine()) != null) {
+		//	String nome = linha;
 			linha = buffR.readLine();
+			ranking.setTempo(Integer.parseInt(linha));
+		//	System.out.println("linha 64-> tempo = "+linha);
+		//	int tempo = Integer.parseInt(linha);
+			//System.out.println("vai adicionar o nome e o tempo: "+nome+tempo);
+			//ranking.adicionaJogador(nome, tempo);
+			linha = buffR.readLine();
+			ranking.setNome(linha);
+		//	System.out.println("linha 68-> nome = "+linha);
+		//	System.out.println("adiciona jogador("+ranking.getNome()+", "+ranking.getTempo());
+			ranking.adicionaJogador(ranking.getNome(),ranking.getTempo() );
 		}
 		Collections.sort(ranking.getDadosRanking());
 		return ranking;
@@ -92,37 +117,8 @@ public class Ranking {
 	public static void setArquivo(File arquivo) {
 		Ranking.arquivo = arquivo;
 	}
-
-	
-	public static void escreverRanking(String nome, int tempo, Dificuldade dificuldade) {
-
-		File arquivo = new File("RANKING.txt");
-		switch (dificuldade) {
-		case FACIL:
-			arquivo = new File("RankingFácil.txt");
-			break;
-		case MEDIO:
-			arquivo = new File("RankingMédio.txt");
-			break;
-		case DIFICIL:
-			arquivo = new File("RankingDifícil.txt");
-			break;
-		}
-		try {
-			if (!arquivo.exists()) {
-				arquivo.createNewFile();
-			}
-			FileWriter fw = new FileWriter(arquivo, true);
-			BufferedWriter escrever = new BufferedWriter(fw);
-			escrever.write(nome + ": " + tempo);
-			escrever.newLine();
-			escrever.close();
-			fw.close();
-		} catch (IOException ex) {
-			System.out.println(ex.getMessage());
-		}
-	}
 }
+
 /*
  * public static void lerRanking(Dificuldade dificuldade) { try { //FileReader
  * ler = new FileReader("RANKING.txt"); switch(dificuldade) { case FACIL: ler =

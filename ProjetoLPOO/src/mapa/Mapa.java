@@ -115,7 +115,7 @@ public abstract class Mapa {
 
 		//imprimeTela(true);// ao final do método, a tela será impressa novamente com os valores
 							// atualizados, deixando os inalterados invisíveis
-		System.out.println("----------------------------");
+		//System.out.println("----------------------------");
 		verificarGanhouJogo();
 	}
 

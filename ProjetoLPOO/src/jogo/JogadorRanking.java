@@ -11,25 +11,23 @@ public class JogadorRanking implements Comparable<JogadorRanking> {
 	public JogadorRanking(String nome, int tempo) {
 		this.nome = nome;
 		this.tempo = tempo;
-		
 	}
 
 	public void adicionaJogador(String nome, int tempo) {
-		dadosRanking.add(new JogadorRanking(nome, tempo)); 
+		dadosRanking.add(new JogadorRanking(nome, tempo));
 	}
-
 	@Override
 	public int compareTo(JogadorRanking jogador2) {
-		if (this.tempo > jogador2.tempo) {
-			//dadosRanking.add(new JogadorRanking(this.nome,this.tempo)); tava testando esses dois 
-			return -1;
-		}
 		if (this.tempo < jogador2.tempo) {
-			//dadosRanking.add(new JogadorRanking(jogador2.getNome(),jogador2.getTempo()));
-			return 1;
-		}
-		return 0;
-	}
+            return -1;
+        }
+        if (this.tempo > jogador2.tempo) {
+            return 1;
+        }
+        return 0;
+    }
+
+	
 
 	public String getNome() {
 		return nome;
@@ -39,7 +37,6 @@ public class JogadorRanking implements Comparable<JogadorRanking> {
 		this.nome = nome;
 	}
 
-    
 	public int getTempo() {
 		return tempo;
 	}
@@ -49,30 +46,37 @@ public class JogadorRanking implements Comparable<JogadorRanking> {
 	}
 
 	public List<JogadorRanking> getDadosRanking() {
-		return dadosRanking;
+		return dadosRanking; 
 	}
 
 	public void setDadosRanking(List<JogadorRanking> dadosRanking) {
 		this.dadosRanking = dadosRanking;
 	}
 
-
-
 	public String retornaNome() {
 		String texto = "";
 		for (JogadorRanking jogador : dadosRanking) {
-			texto += jogador.nome + "\n";
+			texto += jogador.getNome() + "\n";
+		//	System.out.println("iterando o for(retornaNome) " + jogador.getNome());
 		}
 		return texto;
 	}
 
-
 	public String retornaTempo() {
 		String tempo = "";
 		for (JogadorRanking jogador : dadosRanking) {
-			tempo += Integer.toString(jogador.tempo) + "\n";
+			tempo += Integer.toString(jogador.getTempo()) + "\n";
+		//	System.out.println("iterando o for(retornaTempo) "+jogador.getTempo());
 		}
 		return tempo;
+	}
+	
+	public String retornaJogador() {
+		String dados ="";
+		for(JogadorRanking jogador: dadosRanking) {
+			dados+=jogador.getNome()+": "+jogador.getTempo()+" segundos\n";
+		}
+		return dados;
 	}
 
 }
