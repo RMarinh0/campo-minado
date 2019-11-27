@@ -31,9 +31,6 @@ public class TelaJogo extends JFrame {
 	private Mapa mapa;
 	protected CampoMinado campoMinado;
 	
-	
-
-
 	public CampoMinado getCampoMinado() {
 		return this.campoMinado;
 	}

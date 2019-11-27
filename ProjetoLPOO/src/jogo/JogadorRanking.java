@@ -73,8 +73,26 @@ public class JogadorRanking implements Comparable<JogadorRanking> {
 		String dados ="";
 		for(JogadorRanking jogador: dadosRanking) {
 			dados+=jogador.getNome()+": "+jogador.getTempo()+" segundos\n";
+			if(dadosRanking.lastIndexOf(jogador)==4) {
+				dadosRanking.remove(jogador);
+				break;
+			}
+			else
+				continue;
 		}
 		return dados;
+	}
+	public void printaConsole() {
+		int i = 1;
+		String dados = "";
+		for(JogadorRanking jogador: dadosRanking) {
+			dados = jogador.getNome()+": "+jogador.getTempo()+" segundos";
+			System.out.printf("\n%dº lugar -> ",i);
+			System.out.print(dados);
+			i++;
+			if(i==6)
+				break;
+		}
 	}
 
 }

@@ -96,8 +96,13 @@ public class Menu extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					System.out.println("Ranking: "+Ranking.lerRanking("RankingMedio.txt").retornaJogador());
-	
+					//Ranking.lerRanking("RankingFacil.txt").printaConsole();
+					dispose();
+					TelaRanking telaranking = new TelaRanking();
+					telaranking.setVisible(true);
+					System.out.println(Ranking.lerRanking("RankingFacil.txt").retornaJogador());
+					System.out.println(Ranking.lerRanking("RankingMedio.txt").retornaJogador());
+					System.out.println(Ranking.lerRanking("RankingDificil.txt").retornaJogador());
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -130,9 +135,6 @@ public class Menu extends JFrame {
 						tela = new TelaJogo(Dificuldade.DIFICIL);
 					}
 				}
-			//	String nomeJog = nome.getText(); 
-				//tela.campoMinado.getJogador().setNome(nomeJog);	
-			//	int contador=0;
 				String nomeJog = nome.getText(); 
 				tela.campoMinado.getJogador().setNome(nomeJog);
 				if(!nomeJog.isEmpty())

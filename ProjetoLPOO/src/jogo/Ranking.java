@@ -54,23 +54,15 @@ public class Ranking {
 
 
 	public static JogadorRanking lerRanking(String arquivo) throws IOException {
-		//System.out.println("a");
 		fileR = new FileReader(arquivo);
 		buffR = new BufferedReader(fileR);
 		JogadorRanking ranking = new JogadorRanking("fausto", 70);
 		String linha;
 		while ((linha = buffR.readLine()) != null) {
-		//	String nome = linha;a
 			linha = buffR.readLine();
 			ranking.setTempo(Integer.parseInt(linha));
-		//	System.out.println("linha 64-> tempo = "+linha);
-		//	int tempo = Integer.parseInt(linha);
-			/////System.out.println("vai adicionar o nome e o tempo: "+nome+tempo);
-			//ranking.adicionaJogador(nome, tempo);
 			linha = buffR.readLine();
 			ranking.setNome(linha);
-		//	System.out.println("linha 68-> nome = "+linha);
-		//	System.out.println("adiciona jogador("+ranking.getNome()+", "+ranking.getTempo());
 			ranking.adicionaJogador(ranking.getNome(),ranking.getTempo() );
 		}
 		Collections.sort(ranking.getDadosRanking());
