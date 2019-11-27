@@ -30,7 +30,17 @@ public class TelaJogo extends JFrame {
 	private Dificuldade dificuldade;
 	private Mapa mapa;
 	protected CampoMinado campoMinado;
+	
+	
 
+
+	public CampoMinado getCampoMinado() {
+		return campoMinado;
+	}
+
+	public void setCampoMinado(CampoMinado campoMinado) {
+		this.campoMinado = campoMinado;
+	}
 
 	public TelaJogo(Dificuldade dificuldade) {
 		this.campoMinado = new CampoMinado(dificuldade);
