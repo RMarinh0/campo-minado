@@ -1,17 +1,11 @@
 package gui;
 
 import java.awt.*;
-
 import java.util.Timer;
 import java.util.TimerTask;
-//import java.awt.event.*;
-//import javax.swing.JButton;
 import javax.swing.JFrame;
-//import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-//import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
-
 import jogo.*;
 import mapa.*;
 import javax.swing.JLabel;
@@ -30,6 +24,7 @@ public class TelaJogo extends JFrame {
 	private Dificuldade dificuldade;
 	private Mapa mapa;
 	protected CampoMinado campoMinado;
+	private  BotaoJogo botaoJogo;
 	
 	public CampoMinado getCampoMinado() {
 		return this.campoMinado;
@@ -55,7 +50,6 @@ public class TelaJogo extends JFrame {
 		panelmaior.setBackground(Color.BLACK);
 		panel.setBackground(Color.BLACK);
 		setResizable(false);
-
 		panel.setBounds(15, 54, 732, 560);
 		panelmaior.add(panel);
 		panel.setLayout(new GridLayout(campoMinado.getDificuldade().getValor(),
@@ -88,10 +82,12 @@ public class TelaJogo extends JFrame {
 	void setExecutado(boolean pffunfa) {
 		this.jaExecutado = pffunfa;
 	}
+	
+	
+	
 
 	public void criarBotoes() {
 		botoes = new BotaoJogo[campoMinado.getDificuldade().getValor()][campoMinado.getDificuldade().getValor()];
-
 		for (line = 0; line < campoMinado.getDificuldade().getValor(); line++) {
 			for (column = 0; column < campoMinado.getDificuldade().getValor(); column++) {
 				botoes[line][column] = new BotaoJogo(line, column);
@@ -109,9 +105,19 @@ public class TelaJogo extends JFrame {
 				panel.add(botoes[line][column]);
 				botoes[line][column].mouseListener(this);
 				botoes[line][column].actionListenerBotao(this);
+				
 			}
 		}
 	}
+
+//	public void ativarIA(TelaJogo tela) {
+//		tela.campoMinado.getMapa().escolherPosicao(6, 6);
+//		do {
+//			InteliArtificial ia = new InteliArtificial(tela.campoMinado.getMapa().getCelula(6, 6),
+//					tela.campoMinado.getMapa());
+//		
+//		} while (!tela.campoMinado.getMapa().isGanhouJogo());
+//	}
 
 	public void cronometro() {
 		cronometro = new JLabel();

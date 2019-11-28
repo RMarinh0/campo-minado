@@ -27,8 +27,6 @@ public class JogadorRanking implements Comparable<JogadorRanking> {
         return 0;
     }
 
-	
-
 	public String getNome() {
 		return nome;
 	}
@@ -51,22 +49,6 @@ public class JogadorRanking implements Comparable<JogadorRanking> {
 
 	public void setDadosRanking(List<JogadorRanking> dadosRanking) {
 		this.dadosRanking = dadosRanking;
-	}
-
-	public String retornaNome() {
-		String texto = "";
-		for (JogadorRanking jogador : dadosRanking) {
-			texto += jogador.getNome() + "\n";
-		}
-		return texto;
-	}
-
-	public String retornaTempo() {
-		String tempo = "";
-		for (JogadorRanking jogador : dadosRanking) {
-			tempo += Integer.toString(jogador.getTempo()) + "\n";
-		}
-		return tempo;
 	}
 	
 	public String retornaJogador() {

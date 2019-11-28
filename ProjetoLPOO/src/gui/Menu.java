@@ -1,29 +1,19 @@
 package gui;
 
-import java.awt.BorderLayout;
-
 import java.awt.EventQueue;
-//import mapa.*;
 import jogo.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
-//import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
-//import javax.swing.JScrollPane;
-//import javax.swing.JScrollBar;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
-//import javax.swing.ScrollPaneConstants;
-//import javax.swing.ListSelectionModel;
-//import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
@@ -96,7 +86,6 @@ public class Menu extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					//Ranking.lerRanking("RankingFacil.txt").printaConsole();
 					dispose();
 					TelaRanking telaranking = new TelaRanking();
 					telaranking.setVisible(true);

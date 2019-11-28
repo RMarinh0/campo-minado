@@ -1,25 +1,19 @@
 package gui;
 
 import java.awt.Color;
-//import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-//import java.awt.event.MouseListener;
-//import java.text.BreakIterator;
-import java.io.IOException;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-//import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-//import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import jogo.Ranking;
 import jogo.Dificuldade;
+import jogo.InteliArtificial;
 import jogo.CampoMinado;
-//import jogo.Jogador;
+
 
 public class BotaoJogo extends JButton {
 	private int linha;
@@ -66,12 +60,20 @@ public class BotaoJogo extends JButton {
 		});
 	}
 
+	public void ativarIA(TelaJogo tela) {
+		tela.campoMinado.getMapa().escolherPosicao(6, 6);
+		do {
+			InteliArtificial ia = new InteliArtificial(tela.campoMinado.getMapa().getCelula(6, 6),
+					tela.campoMinado.getMapa());
+			printarBotoesCelula(tela);
+		} while (!tela.campoMinado.getMapa().isGanhouJogo());
+	}
+
 	public void actionListenerBotao(TelaJogo tela) {
 		this.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				// Chamo aqui!
 				if (!tela.isExecutado()) { // garantir que o método só seja chamado na primeira jogada
 					primeiraPosicao(tela);
 				} else {
@@ -106,17 +108,20 @@ public class BotaoJogo extends JButton {
 	}
 
 	public void primeiraPosicao(TelaJogo tela) {// garantir que a primeira posição sempre será vazia
-		if (!tela.campoMinado.getMapa().getCelula(linha, coluna).isEmBranco() //Caso a posição não seja em branco,
+		if (!tela.campoMinado.getMapa().getCelula(linha, coluna).isEmBranco() // Caso a posição não seja em branco,
 				|| tela.campoMinado.getMapa().getCelula(linha, coluna).isBomba()) {
-			CampoMinado campo2 = new CampoMinado(tela.campoMinado.getDificuldade());//um novo campoMinado é gerado, que reseta
-			campo2.getJogador().setNome(tela.campoMinado.getJogador().getNome());   // o tabuleiro até que a 1a posição seja vazia
+			CampoMinado campo2 = new CampoMinado(tela.campoMinado.getDificuldade());// um novo campoMinado é gerado, que
+																					// reseta
+			campo2.getJogador().setNome(tela.campoMinado.getJogador().getNome()); // o tabuleiro até que a 1a posição
+																					// seja vazia
 			campo2.getMapa().escolherPosicao(linha, coluna);
-			if (campo2.getMapa().getCelula(linha, coluna).isEmBranco() //caso a posição do novo tabuleiro seja vazia,
-					&& !campo2.getMapa().getCelula(linha, coluna).isBomba()) {//setamos ele como o novo campoMinado a aparecer na tela
+			if (campo2.getMapa().getCelula(linha, coluna).isEmBranco() // caso a posição do novo tabuleiro seja vazia,
+					&& !campo2.getMapa().getCelula(linha, coluna).isBomba()) {// setamos ele como o novo campoMinado a
+																				// aparecer na tela
 				tela.setCampoMinado(campo2);
 				printarBotoesCelula(tela);
 			} else
-				primeiraPosicao(tela);  //rodar novamente até que a 1a posição seja vazia
+				primeiraPosicao(tela); // rodar novamente até que a 1a posição seja vazia
 			tela.setExecutado(true);
 		} else
 			tela.setExecutado(true); // caso a posição já seja vazia, continuar o jogo normalmente
@@ -150,19 +155,12 @@ public class BotaoJogo extends JButton {
 					tela.botoes[i][j].setEnabled(false);
 				}
 			}
-			// this.getIconeBandeiras().setText(Integer.toString(tela.campoMinado.getMapa().getNumBandeiras()));
-
 		}
 		tela.campoMinado.getMapa().verificarGanhouJogo();
 		if (tela.campoMinado.getMapa().isGanhouJogo()) {
 			tela.tm.cancel();
-			// if (tela.campoMinado.getJogador().getNome()!= null)
 			Ranking.escreverRanking(tela.campoMinado.getJogador().getNome(), tela.campoMinado.getJogador().getTempo(),
 					tela.campoMinado.getDificuldade());
-			/*
-			 * try { Ranking.lerRanking(tela.campoMinado.getDificuldade()); } catch
-			 * (IOException e) { // TODO Auto-generated catch block e.printStackTrace(); }
-			 */
 			JOptionPane.showMessageDialog(null,
 					"Parabéns " + tela.campoMinado.getJogador().getNome() + "! Você venceu!");
 			tela.dispose();
