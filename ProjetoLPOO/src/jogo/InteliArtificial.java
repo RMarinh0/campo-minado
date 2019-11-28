@@ -60,7 +60,7 @@ public class InteliArtificial {
 	}
  
 	public void selecionaPosicao(Celula celulaEscolhida, Mapa mapa) {		
-		
+		mapa.escolherPosicao(6, 6);
 		if(mapa.getNumBandeiras()==celulaEscolhida.getQtdBombasVizinhas()) {
 			for(Celula celula: celulaEscolhida.getVizinhos()) {
 				if(!celula.isVisivel())

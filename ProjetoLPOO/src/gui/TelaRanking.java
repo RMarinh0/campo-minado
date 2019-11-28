@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.JFrame;
@@ -13,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import jogo.Ranking;
 import javax.swing.JLabel;
+import javax.swing.JButton;
 
 public class TelaRanking extends JFrame {
 
@@ -35,15 +38,15 @@ public class TelaRanking extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblRanking = new JLabel("RANKING");
-		lblRanking.setForeground(new Color(232,218,0));
+		lblRanking.setForeground(new Color(232, 218, 0));
 		lblRanking.setFont(new Font("LCDMono2", Font.BOLD, 18));
 		lblRanking.setBounds(336, 11, 46, 14);
 		contentPane.add(lblRanking);
-		
+
 		JTextArea dadosFacil = new JTextArea((String) null);
-		dadosFacil.setForeground(new Color(232,218,0));
+		dadosFacil.setForeground(new Color(232, 218, 0));
 		dadosFacil.setBackground(new Color(0, 51, 102));
 		try {
 			dadosFacil.setText(Ranking.lerRanking("RankingFacil.txt").retornaJogador());
@@ -54,9 +57,9 @@ public class TelaRanking extends JFrame {
 		dadosFacil.setFont(new Font("LCDMono2", Font.BOLD, 18));
 		dadosFacil.setEditable(false);
 		contentPane.add(dadosFacil);
-		
+
 		JTextArea dadosDificil = new JTextArea((String) null);
-		dadosDificil.setForeground(new Color(232,218,0));
+		dadosDificil.setForeground(new Color(232, 218, 0));
 		dadosDificil.setBackground(new Color(0, 51, 102));
 		dadosDificil.setFont(new Font("LCDMono2", Font.BOLD, 18));
 		try {
@@ -67,9 +70,9 @@ public class TelaRanking extends JFrame {
 		dadosDificil.setBounds(211, 271, 286, 191);
 		dadosDificil.setEditable(false);
 		contentPane.add(dadosDificil);
-		
+
 		JTextArea dadosMedio = new JTextArea((String) null);
-		dadosMedio.setForeground(new Color(232,218,0));
+		dadosMedio.setForeground(new Color(232, 218, 0));
 		dadosMedio.setBackground(new Color(0, 51, 102));
 		dadosMedio.setFont(new Font("LCDMono2", Font.BOLD, 18));
 		try {
@@ -80,23 +83,36 @@ public class TelaRanking extends JFrame {
 		dadosMedio.setBounds(394, 57, 286, 191);
 		dadosMedio.setEditable(false);
 		contentPane.add(dadosMedio);
-		
+
 		JLabel lblFacil = new JLabel("FACIL");
-		lblFacil.setForeground(new Color(232,218,0));
+		lblFacil.setForeground(new Color(232, 218, 0));
 		lblFacil.setFont(new Font("LCDMono2", Font.BOLD, 18));
 		lblFacil.setBounds(130, 32, 46, 14);
 		contentPane.add(lblFacil);
-		
+
 		JLabel lblDificil = new JLabel("DIFICIL");
-		lblDificil.setForeground(new Color(232,218,0));
+		lblDificil.setForeground(new Color(232, 218, 0));
 		lblDificil.setBounds(336, 250, 46, 14);
 		lblDificil.setFont(new Font("LCDMono2", Font.BOLD, 18));
 		contentPane.add(lblDificil);
-		
+
 		JLabel lblMedio = new JLabel("MEDIO");
-		lblMedio.setForeground(new Color(232,218,0));
+		lblMedio.setForeground(new Color(232, 218, 0));
 		lblMedio.setBounds(520, 32, 46, 14);
 		lblMedio.setFont(new Font("LCDMono2", Font.BOLD, 18));
 		contentPane.add(lblMedio);
+
+		JButton btnV = new JButton("VOLTAR");
+		contentPane.add(btnV);
+		btnV.setBounds(36, 495, 89, 23);
+		btnV.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				Menu menu = new Menu();
+				menu.setVisible(true);
+			}
+		});
 	}
 }
